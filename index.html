@@ -3,419 +3,452 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Zouie — Roblox Studio Builder</title>
+<title>Zouie | Roblox Studio Builder</title>
+<meta name="description" content="Zouie, Roblox Studio builder with +5 years of experience. Small to medium-scale commissions built 100% inside Roblox Studio with Parts and Unions.">
+<meta property="og:title" content="Zouie | Roblox Studio Builder">
+<meta property="og:image" content="images/zouie-avatar.png">
+<link rel="icon" href="images/zouie-headshot.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#f1ece0;--ink:#1b1b1d;--ink2:#46453f;--line:rgba(27,27,29,.08);
-  --yellow:#ffcf2e;--green:#8ac471;--pink:#ff93b4;--blue:#5f74e8;--red:#e8664f;--card:#1a1a1c;
-  --sans:"Space Grotesk",-apple-system,BlinkMacSystemFont,Arial,sans-serif;
-  --pixel:"Silkscreen",ui-monospace,monospace;--hand:"Caveat",cursive;--mono:"Space Mono",ui-monospace,monospace;
+  --paper:#f2eee3;--card:#fffdf8;--ink:#1a1a1c;--ink2:#4a4943;--line:rgba(26,26,28,.07);
+  --yellow:#f6c935;--dark:#1a1a1c;
+  --sans:"Space Grotesk",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --pixel:"Silkscreen",ui-monospace,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:26px 26px;overflow-x:hidden}
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:28px 28px;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 img{display:block;max-width:100%}
-.wrap{max-width:1140px;margin:0 auto;padding:0 28px}
-svg.ic{display:inline-block;vertical-align:middle;flex:none}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+.ic{display:inline-block;vertical-align:middle;flex:none}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{left:12px}
 
-/* NAV */
-.nav{position:sticky;top:16px;z-index:60;padding:0 28px;margin-top:16px}
-.nav-inner{max-width:1140px;margin:0 auto;background:#fffdf7;border:2px solid var(--ink);border-radius:16px;box-shadow:4px 4px 0 var(--ink);
-  display:flex;align-items:center;justify-content:space-between;padding:9px 12px 9px 14px;gap:14px}
-.nav-logo{display:flex;align-items:center;gap:9px;font-family:var(--pixel);font-size:14px}
-.nav-logo .av{width:28px;height:28px;border-radius:50%;border:2px solid var(--ink);object-fit:cover;background:var(--yellow)}
-.nav-links{display:flex;align-items:center;gap:4px}
-.nav-links a{font-family:var(--mono);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:7px 12px;border-radius:9px;border:2px solid transparent;transition:.15s}
-.nav-links a:hover{border-color:var(--ink)}
-.nav-links a.on{background:var(--yellow);border-color:var(--ink);box-shadow:2px 2px 0 var(--ink)}
-.nav-cta{font-family:var(--mono);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:var(--ink);color:var(--paper);
-  padding:9px 15px;border-radius:10px;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--pink);transition:.15s;display:inline-flex;align-items:center;gap:7px}
-.nav-cta:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--pink)}
+/* nav */
+.nav{position:sticky;top:14px;z-index:60;padding:0 28px;margin-top:14px}
+.nav-in{max-width:1120px;margin:0 auto;background:var(--card);border:2px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);
+  display:flex;align-items:center;justify-content:space-between;padding:8px 10px 8px 12px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--pixel);font-size:14px;letter-spacing:.04em}
+.logo img{width:30px;height:30px;border-radius:50%;border:2px solid var(--ink);object-fit:cover;background:var(--yellow)}
+.links{display:flex;gap:2px}
+.links a{font-weight:600;font-size:14px;padding:7px 13px;border-radius:9px;border:2px solid transparent;transition:background .15s}
+.links a:hover{background:rgba(26,26,28,.07)}
+.links a.on{background:var(--yellow);border-color:var(--ink)}
+.cta{font-weight:600;font-size:14px;background:var(--ink);color:#fff;padding:9px 16px;border-radius:10px;transition:transform .12s}
+.cta:hover{transform:translateY(-1px)}
 
-/* HERO */
-.hero{padding:60px 0 30px}
-.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
-.kick{font-family:var(--mono);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--ink2);display:inline-flex;align-items:center;gap:9px}
-.namebox{position:relative;display:inline-block;margin:18px 0 6px;transform:rotate(-1.4deg)}
-.namebox .box{border:3px solid var(--ink);border-radius:18px;background:#fffdf7;box-shadow:7px 8px 0 var(--ink);padding:14px 38px 6px}
-.namebox .nm{font-family:var(--pixel);font-weight:700;font-size:clamp(56px,11vw,128px);line-height:.95;letter-spacing:.01em}
-.tape{position:absolute;width:88px;height:28px;background:rgba(255,207,46,.72);border:1px dashed rgba(27,27,29,.35)}
-.tape.t1{top:-14px;left:-22px;transform:rotate(-24deg)}
-.tape.t2{bottom:-14px;right:-18px;transform:rotate(-20deg);background:rgba(255,147,180,.72)}
-.readtos{font-family:var(--hand);font-size:26px;color:var(--ink2);transform:rotate(-2deg);display:inline-flex;align-items:center;gap:8px;margin-top:4px}
-.hero-btns{margin-top:26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.btn-dark{background:var(--ink);color:var(--paper);font-weight:600;font-size:15px;padding:13px 24px;border-radius:12px;border:2px solid var(--ink);
-  box-shadow:4px 4px 0 var(--green);display:inline-flex;align-items:center;gap:9px;transition:.15s}
-.btn-dark:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--green)}
-.btn-ghost{font-family:var(--mono);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-bottom:2px solid var(--ink);padding-bottom:2px}
-/* avatar card */
-.avcard{position:relative;background:#fffdf7;border:3px solid var(--ink);border-radius:20px;box-shadow:7px 8px 0 var(--ink);padding:14px;transform:rotate(2deg)}
-.avcard .inner{background:linear-gradient(180deg,#e9e3d4,#dcd5c3);border:2px solid var(--ink);border-radius:12px;overflow:hidden;position:relative}
-.avcard img{width:100%;height:auto;display:block}
-.avcard .ribbon{position:absolute;bottom:12px;left:12px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:10px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.08em;padding:6px 10px;border-radius:7px}
-.avcard .pin{position:absolute;top:-12px;right:22px;width:22px;height:22px;border-radius:50%;background:var(--red);border:2px solid var(--ink);box-shadow:2px 2px 0 rgba(0,0,0,.2)}
-/* +5 years big stat */
-.yearsbar{margin-top:40px;display:flex;align-items:stretch;gap:0;flex-wrap:wrap;border:2px solid var(--ink);border-radius:16px;overflow:hidden;box-shadow:5px 5px 0 var(--ink);background:#fffdf7}
-.years-n{background:var(--yellow);border-right:2px solid var(--ink);padding:18px 30px;display:flex;align-items:center}
-.years-n b{font-family:var(--pixel);font-size:clamp(44px,7vw,78px);line-height:.85}
-.years-t{padding:18px 26px;display:flex;flex-direction:column;justify-content:center}
-.years-t .big{font-size:clamp(20px,2.6vw,30px);font-weight:700;line-height:1.1}
-.years-t .sub{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-top:4px}
+/* hero */
+.hero{padding:64px 0 28px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center}
+.sub{font-weight:600;font-size:17px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.namebox{display:inline-block;margin:14px 0 12px;border:3px solid var(--ink);border-radius:18px;background:var(--card);box-shadow:6px 7px 0 var(--ink);padding:14px 38px 6px}
+.nm{font-family:var(--pixel);font-weight:700;font-size:clamp(54px,11vw,124px);line-height:.95}
+.tos{font-weight:700;font-style:italic;font-size:19px}
+.btns{margin-top:26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.btn{background:var(--ink);color:#fff;font-weight:600;padding:13px 24px;border-radius:12px;box-shadow:4px 4px 0 var(--yellow);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--yellow)}
+.txtlink{font-weight:600;border-bottom:2px solid var(--ink);padding-bottom:1px}
+.txtlink:hover{background:var(--yellow)}
+.avatar{display:block;background:var(--card);border:3px solid var(--ink);border-radius:20px;box-shadow:6px 7px 0 var(--ink);padding:12px;transition:transform .15s}
+.avatar:hover{transform:translate(-2px,-2px)}
+.avatar .in{background:#e4dece;border:2px solid var(--ink);border-radius:12px;overflow:hidden}
+.avatar .cap{display:flex;align-items:center;justify-content:space-between;padding:10px 6px 2px;font-weight:600;font-size:14px}
 
-/* SECTION */
-.sec{padding:60px 0}
-.sec-k{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
-  background:#fffdf7;border:2px solid var(--ink);border-radius:9px;padding:6px 12px;box-shadow:2px 2px 0 var(--ink);transform:rotate(-1.2deg)}
-.sec-h{font-size:clamp(30px,4.6vw,50px);font-weight:700;letter-spacing:-.02em;margin-top:20px;line-height:1.05}
-.empty-h{opacity:.55}
+.years{margin-top:44px;display:flex;border:2px solid var(--ink);border-radius:16px;overflow:hidden;box-shadow:5px 5px 0 var(--ink);background:var(--card)}
+.years b{background:var(--yellow);border-right:2px solid var(--ink);padding:14px 32px;font-family:var(--pixel);font-size:clamp(46px,8vw,86px);line-height:1;display:flex;align-items:center}
+.years span{padding:18px 26px;font-size:clamp(20px,2.7vw,32px);font-weight:700;line-height:1.15;display:flex;align-items:center}
 
-/* ABOUT */
-.intro-line{font-size:clamp(20px,2.4vw,27px);font-weight:600;line-height:1.35;max-width:760px;margin-top:26px}
-.intro-line .mk{background:linear-gradient(180deg,transparent 58%,var(--yellow) 58%)}
-.ab-cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:40px}
-.panel{background:#fffdf7;border:2px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);padding:24px}
-.panel h4{font-family:var(--mono);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center;gap:9px;margin-bottom:18px}
-.suits{display:flex;flex-wrap:wrap;gap:10px}
-.suit{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;padding:9px 14px;border:2px solid var(--ink);border-radius:30px;box-shadow:3px 3px 0 var(--ink)}
-.suit.c0{background:var(--yellow)}.suit.c1{background:var(--green)}.suit.c2{background:var(--pink)}.suit.c3{background:var(--blue);color:#fff}.suit.c4{background:#fff6d6}
-.suit .ic{color:currentColor}
-.excel{font-family:var(--hand);font-size:22px;color:var(--ink2);margin-top:16px;display:flex;align-items:center;gap:8px}
+/* sections */
+.sec{padding:64px 0}
+h2.lab{display:inline-block;font-size:15px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--card);border:2px solid var(--ink);border-radius:9px;padding:6px 13px;box-shadow:2px 2px 0 var(--ink)}
+.hello{font-size:clamp(22px,2.8vw,32px);font-weight:700;line-height:1.25;max-width:780px;margin-top:24px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+.panel{background:var(--card);border:2px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);padding:24px}
+.panel h3{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:18px}
+.suits{list-style:none;display:grid;gap:10px}
+.suits li{display:flex;align-items:center;gap:11px;font-weight:600;font-size:17px}
+.suits .ic{background:var(--yellow);border:2px solid var(--ink);border-radius:6px;padding:2px;width:24px;height:24px}
+.excel{margin-top:20px;padding-top:16px;border-top:2px dashed var(--ink);font-style:italic;font-weight:600}
 .nolist{list-style:none;display:grid;gap:11px}
-.nolist li{display:flex;align-items:flex-start;gap:11px;font-size:15px;color:var(--ink2);font-weight:500}
-.nolist li .ic{color:var(--red);margin-top:2px}
-.credits{margin-top:26px}
-.credit-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px}
-.credit{background:#fffdf7;border:2px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);padding:16px 14px;transition:.15s;display:flex;flex-direction:column;gap:10px;min-height:118px;justify-content:space-between}
-.credit:hover{transform:translate(-1px,-3px);box-shadow:5px 7px 0 var(--ink);background:var(--yellow)}
-.credit .cn{font-weight:700;font-size:16px;line-height:1.1;letter-spacing:-.01em}
-.credit .cl{font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.nolist li{display:flex;gap:11px;align-items:flex-start;color:var(--ink2);font-weight:500}
+.nolist .ic{margin-top:4px}
+.credits{margin-top:40px}
+.credits h3{font-size:19px;font-weight:700;margin-bottom:16px}
+.cgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.credit{display:flex;flex-direction:column;justify-content:space-between;gap:16px;min-height:112px;background:var(--card);border:2px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);padding:15px;transition:transform .12s,box-shadow .12s,background .12s}
+.credit:hover{transform:translate(-1px,-2px);box-shadow:4px 5px 0 var(--ink);background:var(--yellow)}
+.credit b{font-size:17px;line-height:1.15}
+.credit small{display:flex;align-items:center;gap:6px;font-weight:600;font-size:12.5px;color:var(--ink2)}
+.credit:hover small{color:var(--ink)}
 
-/* SLIDESHOW */
-.show{background:#fffdf7;border:2px solid var(--ink);border-radius:20px;box-shadow:6px 7px 0 var(--ink);overflow:hidden;margin-top:22px}
-.show-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:2px solid var(--ink);gap:12px;flex-wrap:wrap}
-.show-head .t{font-size:24px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
-.show-head .tag{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--ink);color:var(--paper);padding:5px 10px;border-radius:7px}
-.stage{position:relative;background:var(--card);aspect-ratio:16/9}
-.stage .sl{position:absolute;inset:0;opacity:0;transition:opacity .45s ease;display:flex;align-items:center;justify-content:center}
-.stage .sl.act{opacity:1}
-.stage .sl img{width:100%;height:100%;object-fit:cover}
-.arw{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:46px;height:46px;border-radius:50%;background:#fffdf7;border:2px solid var(--ink);
-  box-shadow:3px 3px 0 var(--ink);display:grid;place-items:center;cursor:pointer;transition:.12s}
+/* slideshow */
+.show{background:var(--card);border:2px solid var(--ink);border-radius:20px;box-shadow:6px 7px 0 var(--ink);overflow:hidden;margin-top:26px}
+.show-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:16px 22px;border-bottom:2px solid var(--ink)}
+.st-game{font-size:clamp(22px,3vw,32px);font-weight:700;line-height:1.1}
+.st-cap{font-weight:600;color:var(--ink2);margin-top:3px;font-size:15px}
+.st-cap:empty{display:none}
+.counter{font-family:var(--pixel);font-size:16px;white-space:nowrap}
+.stage{position:relative;background:var(--dark);aspect-ratio:16/9;touch-action:pan-y}
+.sl{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .4s}
+.sl.act{opacity:1;visibility:visible}
+.sl img{width:100%;height:100%;object-fit:cover}
+.arw{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:48px;height:48px;border-radius:50%;background:var(--card);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);display:grid;place-items:center;transition:background .12s}
 .arw:hover{background:var(--yellow)}
-.arw:active{transform:translateY(-50%) translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.arw:active{box-shadow:1px 1px 0 var(--ink);margin-top:2px}
 .arw.prev{left:16px}.arw.next{right:16px}
-.show-foot{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
-.dots{display:flex;gap:8px;flex-wrap:wrap}
-.dot{width:11px;height:11px;border-radius:50%;border:2px solid var(--ink);background:transparent;cursor:pointer;padding:0;transition:.12s}
-.dot.on{background:var(--ink)}
-.counter{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--ink2)}
-.counter b{color:var(--ink)}
+.strip{display:flex;gap:8px;overflow-x:auto;padding:12px 16px;border-top:2px solid var(--ink);scrollbar-width:thin;background:#f7f3e8}
+.th{flex:none;width:96px;aspect-ratio:16/10;border:2px solid transparent;border-radius:8px;overflow:hidden;opacity:.6;transition:opacity .15s;padding:0;background:var(--dark)}
+.th img{width:100%;height:100%;object-fit:cover}
+.th:hover{opacity:1}
+.th.on{opacity:1;border-color:var(--ink);box-shadow:0 0 0 2px var(--yellow)}
 
-/* TERMS */
-.stat-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
-.sbit{background:var(--ink);color:var(--paper);border-radius:14px;padding:16px 22px;min-width:140px;box-shadow:4px 4px 0 var(--pink)}
-.sbit:nth-child(2){box-shadow:4px 4px 0 var(--green)}.sbit:nth-child(3){box-shadow:4px 4px 0 var(--blue)}.sbit:nth-child(4){box-shadow:4px 4px 0 var(--yellow)}
-.sbit .bn{font-family:var(--pixel);font-size:30px;color:var(--yellow);line-height:1}
-.sbit:nth-child(2) .bn{color:var(--green)}.sbit:nth-child(3) .bn{color:var(--pink)}.sbit:nth-child(4) .bn{color:var(--blue)}
-.sbit .bl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-top:8px;opacity:.85;line-height:1.4}
-.terms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
-.note{background:#fffdf7;border:2px solid var(--ink);border-radius:6px;box-shadow:4px 5px 0 var(--ink);padding:22px}
-.note:nth-child(3n+2){background:#fff6d6}
-.note .nh{font-family:var(--mono);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.note .nh .lt{font-family:var(--pixel);font-size:16px;background:var(--ink);color:var(--paper);width:28px;height:28px;display:grid;place-items:center;border-radius:7px}
-.note ul{list-style:none;display:grid;gap:12px}
-.note li{font-size:14px;line-height:1.5;padding-left:20px;position:relative;color:var(--ink2)}
-.note li .ic{position:absolute;left:0;top:3px;color:var(--ink)}
-.note li b{color:var(--ink);font-weight:700}
-.note li .num{font-family:var(--pixel);font-size:15px;color:var(--ink);letter-spacing:.02em}
-.thanks{font-family:var(--hand);font-size:28px;color:var(--ink2);margin-top:30px;text-align:center}
+/* terms */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+.num{background:var(--dark);color:#fff;border-radius:14px;padding:18px 20px;box-shadow:4px 4px 0 var(--yellow)}
+.num b{display:block;font-family:var(--pixel);font-size:clamp(30px,4vw,46px);line-height:1;color:var(--yellow)}
+.num span{display:block;margin-top:10px;font-size:13.5px;line-height:1.35;color:#ddd9cc}
+.terms{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px;align-items:start}
+.note{background:var(--card);border:2px solid var(--ink);border-radius:8px;box-shadow:4px 4px 0 var(--ink);padding:22px}
+.note h3{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;margin-bottom:14px;line-height:1.2}
+.note h3 i{font-style:normal;font-family:var(--pixel);font-size:15px;background:var(--ink);color:#fff;min-width:28px;height:28px;border-radius:7px;display:grid;place-items:center}
+.note ul{list-style:none;display:grid;gap:13px}
+.note li{font-size:14.5px;line-height:1.5;color:var(--ink2);padding-left:18px;position:relative}
+.note li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;background:var(--ink)}
+.note li strong{color:var(--ink);font-weight:700}
+.note .n{font-family:var(--pixel);color:var(--ink);font-size:15px;background:var(--yellow);padding:0 4px;border-radius:3px}
+.thanks{margin-top:28px;font-weight:600;font-style:italic}
 
-/* CONTACT */
-.contact{background:var(--ink);color:var(--paper);border:2px solid var(--ink);border-radius:26px;box-shadow:8px 9px 0 var(--pink);padding:54px 44px;margin:24px 0 20px}
-.contact .sec-k{color:var(--ink)}
-.contact h2{font-size:clamp(30px,5vw,56px);font-weight:700;letter-spacing:-.02em;line-height:1;margin-top:8px}
-.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
-.ccard{background:#262627;border:2px solid #3a3a3c;border-radius:16px;padding:22px;transition:.15s}
-.ccard:hover{background:#2f2f31;border-color:var(--yellow);transform:translateY(-3px)}
-.ccard .cl{font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#9a978e;display:flex;align-items:center;gap:7px}
-.ccard .cv{font-size:18px;font-weight:600;margin-top:12px;word-break:break-all}
-.ccard:hover .cv{color:var(--yellow)}
-footer{text-align:center;padding:10px 0 50px;font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2)}
+/* contact */
+.contact{background:var(--dark);color:#fff;border-radius:24px;box-shadow:7px 8px 0 var(--yellow);padding:50px 42px}
+.contact h2{font-size:clamp(28px,4.6vw,52px);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:.01em}
+.ct{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.card{position:relative;background:#27272a;border:2px solid #3b3b3f;border-radius:16px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--yellow);transform:translateY(-2px)}
+.card .main{display:block;padding:20px 20px 18px}
+.card .l{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#a7a498;text-transform:uppercase;letter-spacing:.06em}
+.card .v{font-size:19px;font-weight:600;margin-top:12px;word-break:break-all}
+.card:hover .v{color:var(--yellow)}
+.copy{position:absolute;top:12px;right:12px;display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;background:#3a3a3e;border-radius:8px;padding:6px 10px;color:#eee;transition:background .12s}
+.copy:hover{background:var(--yellow);color:var(--ink)}
+.copy.done{background:var(--yellow);color:var(--ink)}
+footer{padding:34px 0 46px;text-align:center;font-family:var(--pixel);font-size:14px;letter-spacing:.06em}
 
-.r{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.r{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
 .r.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none}.sl{transition:none}html{scroll-behavior:auto}}
 
-@media(max-width:860px){
+@media(max-width:900px){
   .hero-grid{grid-template-columns:1fr;gap:30px}
-  .avcard{max-width:300px;margin:0 auto}
-  .ab-cols{grid-template-columns:1fr}
-  .credit-grid{grid-template-columns:repeat(2,1fr)}
-  .terms-grid{grid-template-columns:1fr}
-  .cgrid{grid-template-columns:1fr}
-  .nav-links{display:none}
+  .avatar{max-width:300px}
+  .cols,.terms,.ct{grid-template-columns:1fr}
+  .cgrid{grid-template-columns:repeat(2,1fr)}
+  .nums{grid-template-columns:repeat(2,1fr)}
+  .logo span{display:none}
+  .links a{padding:7px 9px;font-size:13px}
+  .cta{display:none}
+  .nav{padding:0 14px}.wrap{padding:0 18px}
+  .arw{width:40px;height:40px}.arw.prev{left:8px}.arw.next{right:8px}
+  .contact{padding:34px 22px}
 }
 </style>
 </head>
 <body id="top">
+<a class="skip" href="#about">Skip to content</a>
 
-<!-- ICON DEFS -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4L12 2z" fill="currentColor"/></symbol>
-<symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5 11-12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
-<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-<symbol id="i-left" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-<symbol id="i-right" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-<symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7l9-5z M12 2v20 M3 7l9 5 9-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-out" viewBox="0 0 24 24"><path d="M8 16L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
 <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
-<symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8V4z" fill="currentColor"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 </defs></svg>
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="nav-logo" href="#top"><img class="av" src="images/zouie-headshot.png" alt="Zouie">ZOUIE</a>
-    <div class="nav-links">
-      <a href="#about" class="on">ABOUT</a>
-      <a href="#work">WORK</a>
-      <a href="#terms">TERMS</a>
-      <a href="#contact">CONTACT</a>
+<nav class="nav" aria-label="Main">
+  <div class="nav-in">
+    <a class="logo" href="#top"><img src="images/zouie-headshot.png" alt=""><span>ZOUIE</span></a>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#work">Projects</a>
+      <a href="#terms">Terms</a>
+      <a href="#contact">Contact</a>
     </div>
-    <a class="nav-cta" href="#contact"><svg class="ic" width="13" height="13"><use href="#i-spark"/></svg>COMMISSION</a>
+    <a class="cta" href="#contact">Commission me</a>
   </div>
 </nav>
 
-<!-- HERO -->
+<main>
 <header class="hero">
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <span class="kick"><svg class="ic" width="14" height="14"><use href="#i-cube"/></svg>ROBLOX STUDIO BUILDER</span>
-        <div class="namebox">
-          <span class="tape t1"></span><span class="tape t2"></span>
-          <div class="box"><div class="nm">ZOUIE</div></div>
-        </div>
-        <div><span class="readtos"><svg class="ic" width="18" height="18"><use href="#i-arrow"/></svg>Read ToS below</span></div>
-        <div class="hero-btns">
-          <a class="btn-dark" href="#contact"><svg class="ic" width="15" height="15"><use href="#i-spark"/></svg>Commission me</a>
-          <a class="btn-ghost" href="#terms">read the terms</a>
+        <h1><span class="namebox"><span class="nm">ZOUIE</span></span></h1>
+        <p class="sub">Roblox Studio Builder</p>
+        <p class="tos">Read ToS below</p>
+        <div class="btns">
+          <a class="btn" href="#contact">Commission me</a>
+          <a class="txtlink" href="#terms">Terms of Service</a>
         </div>
       </div>
-      <div class="avcard">
-        <span class="pin"></span>
-        <div class="inner"><img src="images/zouie-avatar.png" alt="Zouie's Roblox avatar"></div>
-        <span class="ribbon">@ZOUIE · ON ROBLOX</span>
-      </div>
+      <a class="avatar" href="https://www.roblox.com/users/1455286846/profile" target="_blank" rel="noopener" aria-label="Zouie on Roblox (opens in a new tab)">
+        <div class="in"><img src="images/zouie-avatar.png" alt="Zouie's Roblox avatar" width="560" height="560"></div>
+        <div class="cap"><span>Roblox: Zouie</span><svg class="ic" width="18" height="18"><use href="#i-out"/></svg></div>
+      </a>
     </div>
-
-    <div class="yearsbar">
-      <div class="years-n"><b>+5</b></div>
-      <div class="years-t">
-        <span class="big">years of experience in building</span>
-        <span class="sub">builder on Roblox Studio · no third-party programs</span>
-      </div>
-    </div>
+    <div class="years"><b>+5</b><span>years of experience in building</span></div>
   </div>
 </header>
 
-<!-- ABOUT -->
 <section class="sec" id="about">
   <div class="wrap">
-    <span class="sec-k"><svg class="ic" width="13" height="13"><use href="#i-spark"/></svg>ABOUT ME</span>
-    <p class="intro-line">Hello! I am a builder on Roblox Studio <span class="mk">(without any third-party programs).</span></p>
-
-    <div class="ab-cols">
+    <h2 class="lab">About me</h2>
+    <p class="hello">Hello! I am a builder on Roblox Studio (without any third-party programs)</p>
+    <div class="cols">
       <div class="panel">
-        <h4><svg class="ic" width="14" height="14"><use href="#i-check"/></svg>MY STRONG SUITS</h4>
-        <div class="suits">
-          <span class="suit c0"><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>Exterior buildings</span>
-          <span class="suit c1"><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>Sci-fi theme</span>
-          <span class="suit c2"><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>Blocky terrains</span>
-          <span class="suit c3"><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>Mid poly</span>
-          <span class="suit c4"><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>Semi-realistic</span>
-        </div>
-        <div class="excel"><svg class="ic" width="16" height="16"><use href="#i-spark"/></svg>I excel in building MM2 / FTF style maps</div>
+        <h3>My strong suits</h3>
+        <ul class="suits">
+          <li><svg class="ic" width="24" height="24"><use href="#i-check"/></svg>Exterior buildings</li>
+          <li><svg class="ic" width="24" height="24"><use href="#i-check"/></svg>Sci-fi theme</li>
+          <li><svg class="ic" width="24" height="24"><use href="#i-check"/></svg>Blocky terrains</li>
+          <li><svg class="ic" width="24" height="24"><use href="#i-check"/></svg>Mid poly</li>
+          <li><svg class="ic" width="24" height="24"><use href="#i-check"/></svg>Semi-realistic</li>
+        </ul>
+        <p class="excel">*I excel in building MM2/FTF style maps</p>
       </div>
       <div class="panel">
-        <h4><svg class="ic" width="14" height="14"><use href="#i-x"/></svg>WHAT I DO NOT TAKE COMMISSIONS FOR</h4>
+        <h3>What I do not take commissions for</h3>
         <ul class="nolist">
-          <li><svg class="ic" width="15" height="15"><use href="#i-x"/></svg>Realistic builds / textures</li>
-          <li><svg class="ic" width="15" height="15"><use href="#i-x"/></svg>Low poly builds</li>
-          <li><svg class="ic" width="15" height="15"><use href="#i-x"/></svg>Any assets made by third-party programs</li>
-          <li><svg class="ic" width="15" height="15"><use href="#i-x"/></svg>Lighting setup</li>
-          <li><svg class="ic" width="15" height="15"><use href="#i-x"/></svg>Terrain Editor</li>
-          <li><svg class="ic" width="15" height="15"><use href="#i-x"/></svg>Improving the visual of a completed build</li>
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Realistic builds/textures</li>
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Low poly builds</li>
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Any assets made by third-party programs</li>
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Lighting setup</li>
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Terrain Editor</li>
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Improving the visual of a completed build</li>
         </ul>
       </div>
     </div>
-
     <div class="credits">
-      <span class="sec-k"><svg class="ic" width="13" height="13"><use href="#i-cube"/></svg>I HAVE CONTRIBUTED AS A BUILDER TO</span>
-      <div class="credit-grid">
-        <a class="credit" href="https://www.roblox.com/games/135960504898541/ManHunt" target="_blank" rel="noopener"><span class="cn">ManHunt</span><span class="cl"><svg class="ic" width="11" height="11"><use href="#i-play"/></svg>Play on Roblox</span></a>
-        <a class="credit" href="https://www.roblox.com/games/131794278839305/Dodge-or-Die" target="_blank" rel="noopener"><span class="cn">Dodge or Die</span><span class="cl"><svg class="ic" width="11" height="11"><use href="#i-play"/></svg>Play on Roblox</span></a>
-        <a class="credit" href="https://www.roblox.com/games/6172932937/Energy-Assault-FPS" target="_blank" rel="noopener"><span class="cn">Energy Assault FPS</span><span class="cl"><svg class="ic" width="11" height="11"><use href="#i-play"/></svg>Play on Roblox</span></a>
-        <a class="credit" href="https://www.roblox.com/games/277751860/Epic-Minigames" target="_blank" rel="noopener"><span class="cn">Epic Minigames</span><span class="cl"><svg class="ic" width="11" height="11"><use href="#i-play"/></svg>Play on Roblox</span></a>
-        <a class="credit" href="https://www.roblox.com/games/1382113806/Silent-Assassin" target="_blank" rel="noopener"><span class="cn">Silent Assassin</span><span class="cl"><svg class="ic" width="11" height="11"><use href="#i-play"/></svg>Play on Roblox</span></a>
+      <h3>I have contributed as a builder to:</h3>
+      <div class="cgrid">
+        <a class="credit" href="https://www.roblox.com/games/135960504898541/ManHunt" target="_blank" rel="noopener"><b>ManHunt</b><small>Play on Roblox <svg class="ic" width="13" height="13"><use href="#i-out"/></svg></small></a>
+        <a class="credit" href="https://www.roblox.com/games/131794278839305/Dodge-or-Die" target="_blank" rel="noopener"><b>Dodge or Die</b><small>Play on Roblox <svg class="ic" width="13" height="13"><use href="#i-out"/></svg></small></a>
+        <a class="credit" href="https://www.roblox.com/games/6172932937/Energy-Assault-FPS" target="_blank" rel="noopener"><b>Energy Assault FPS</b><small>Play on Roblox <svg class="ic" width="13" height="13"><use href="#i-out"/></svg></small></a>
+        <a class="credit" href="https://www.roblox.com/games/277751860/Epic-Minigames" target="_blank" rel="noopener"><b>Epic Minigames</b><small>Play on Roblox <svg class="ic" width="13" height="13"><use href="#i-out"/></svg></small></a>
+        <a class="credit" href="https://www.roblox.com/games/1382113806/Silent-Assassin" target="_blank" rel="noopener"><b>Silent Assassin</b><small>Play on Roblox <svg class="ic" width="13" height="13"><use href="#i-out"/></svg></small></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHY ME (empty on his site) -->
-<section class="sec" id="why" style="padding-top:0">
-  <div class="wrap"><span class="sec-k empty-h"><svg class="ic" width="13" height="13"><use href="#i-spark"/></svg>WHY ME?</span></div>
-</section>
-
-<!-- WORK / PROJECTS -->
-<section class="sec" id="work" style="padding-top:0">
+<section class="sec" id="work" style="padding-top:8px">
   <div class="wrap">
-    <span class="sec-k"><svg class="ic" width="13" height="13"><use href="#i-cube"/></svg>PROJECTS</span>
-
-    <div class="show" data-show="bc">
-      <div class="show-head">
-        <div class="t"><svg class="ic" width="20" height="20"><use href="#i-cube"/></svg>Black Clover #3</div>
-        <span class="tag">WORLD BUILD</span>
-      </div>
+    <h2 class="lab">Projects</h2>
+    <section class="show" tabindex="0" aria-label="Project images, set 1">
+      <div class="show-head"><div><h3 class="st-game" aria-live="polite"></h3><p class="st-cap"></p></div><span class="counter"></span></div>
       <div class="stage">
-        <button class="arw prev" aria-label="Previous"><svg class="ic" width="22" height="22"><use href="#i-left"/></svg></button>
-        <button class="arw next" aria-label="Next"><svg class="ic" width="22" height="22"><use href="#i-right"/></svg></button>
-        <div class="sl act"><img src="images/bc-0.jpg" alt="Black Clover #3 — 1"></div>
-        <div class="sl"><img src="images/bc-1.jpg" alt="Black Clover #3 — 2"></div>
-        <div class="sl"><img src="images/bc-2.jpg" alt="Black Clover #3 — 3"></div>
-        <div class="sl"><img src="images/bc-3.jpg" alt="Black Clover #3 — 4"></div>
-        <div class="sl"><img src="images/bc-4.jpg" alt="Black Clover #3 — 5"></div>
-        <div class="sl"><img src="images/bc-5.jpg" alt="Black Clover #3 — 6"></div>
+        <button class="arw prev" type="button" aria-label="Previous image"><svg class="ic" width="22" height="22"><use href="#i-left"/></svg></button>
+        <button class="arw next" type="button" aria-label="Next image"><svg class="ic" width="22" height="22"><use href="#i-right"/></svg></button>
+        <div class="sl act" data-title="Black Clover #3" data-sub="" aria-hidden="false"><img src="images/work/black-clover-3.jpg" alt="Black Clover #3"></div>
+        <div class="sl" data-title="Black Clover #2" data-sub="" aria-hidden="true"><img src="images/work/black-clover-2.jpg" alt="Black Clover #2" loading="lazy"></div>
+        <div class="sl" data-title="Juju" data-sub="" aria-hidden="true"><img src="images/work/juju.jpg" alt="Juju" loading="lazy"></div>
+        <div class="sl" data-title="Sci-fi Lobby #2" data-sub="" aria-hidden="true"><img src="images/work/sci-fi-lobby-2.jpg" alt="Sci-fi Lobby #2" loading="lazy"></div>
+        <div class="sl" data-title="Beach House" data-sub="" aria-hidden="true"><img src="images/work/beach-house.jpg" alt="Beach House" loading="lazy"></div>
+        <div class="sl" data-title="Obby Island #1" data-sub="" aria-hidden="true"><img src="images/work/obby-island-1.jpg" alt="Obby Island #1" loading="lazy"></div>
+        <div class="sl" data-title="Obby Island #2" data-sub="" aria-hidden="true"><img src="images/work/obby-island-2.jpg" alt="Obby Island #2" loading="lazy"></div>
+        <div class="sl" data-title="Gladiator Ground" data-sub="" aria-hidden="true"><img src="images/work/gladiator-ground.jpg" alt="Gladiator Ground" loading="lazy"></div>
+        <div class="sl" data-title="Storage" data-sub="" aria-hidden="true"><img src="images/work/storage.jpg" alt="Storage" loading="lazy"></div>
+        <div class="sl" data-title="Karaoke #1" data-sub="" aria-hidden="true"><img src="images/work/karaoke-1.jpg" alt="Karaoke #1" loading="lazy"></div>
+        <div class="sl" data-title="Karaoke #2" data-sub="" aria-hidden="true"><img src="images/work/karaoke-2.jpg" alt="Karaoke #2" loading="lazy"></div>
+        <div class="sl" data-title="Random builds" data-sub="" aria-hidden="true"><img src="images/work/random-builds.jpg" alt="Random builds" loading="lazy"></div>
+        <div class="sl" data-title="Foosha Village" data-sub="" aria-hidden="true"><img src="images/work/foosha-village.jpg" alt="Foosha Village" loading="lazy"></div>
+        <div class="sl" data-title="Sci-fi Western" data-sub="" aria-hidden="true"><img src="images/work/sci-fi-western.jpg" alt="Sci-fi Western" loading="lazy"></div>
+        <div class="sl" data-title="Space Checkpoint #1" data-sub="" aria-hidden="true"><img src="images/work/space-checkpoint-1.jpg" alt="Space Checkpoint #1" loading="lazy"></div>
       </div>
-      <div class="show-foot">
-        <div class="dots"></div>
-        <div class="counter"><b>01</b> / 06</div>
+      <div class="strip">
+      <button class="th" type="button" aria-label="Show Black Clover #3"><img src="images/work/black-clover-3.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Black Clover #2"><img src="images/work/black-clover-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Juju"><img src="images/work/juju.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Sci-fi Lobby #2"><img src="images/work/sci-fi-lobby-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Beach House"><img src="images/work/beach-house.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Obby Island #1"><img src="images/work/obby-island-1.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Obby Island #2"><img src="images/work/obby-island-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Gladiator Ground"><img src="images/work/gladiator-ground.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Storage"><img src="images/work/storage.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Karaoke #1"><img src="images/work/karaoke-1.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Karaoke #2"><img src="images/work/karaoke-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Random builds"><img src="images/work/random-builds.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Foosha Village"><img src="images/work/foosha-village.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Sci-fi Western"><img src="images/work/sci-fi-western.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Space Checkpoint #1"><img src="images/work/space-checkpoint-1.jpg" alt="" loading="lazy"></button>
       </div>
-    </div>
-
-    <div class="show" data-show="dd" style="margin-top:28px">
-      <div class="show-head">
-        <div class="t"><svg class="ic" width="20" height="20"><use href="#i-cube"/></svg>Dodge Or Die Lobby</div>
-        <span class="tag">LOBBY INTERIOR</span>
-      </div>
+    </section>
+    <section class="show" tabindex="0" aria-label="Project images, set 2">
+      <div class="show-head"><div><h3 class="st-game" aria-live="polite"></h3><p class="st-cap"></p></div><span class="counter"></span></div>
       <div class="stage">
-        <button class="arw prev" aria-label="Previous"><svg class="ic" width="22" height="22"><use href="#i-left"/></svg></button>
-        <button class="arw next" aria-label="Next"><svg class="ic" width="22" height="22"><use href="#i-right"/></svg></button>
-        <div class="sl act"><img src="images/dd-0.jpg" alt="Dodge Or Die Lobby — 1"></div>
-        <div class="sl"><img src="images/dd-1.jpg" alt="Dodge Or Die Lobby — 2"></div>
-        <div class="sl"><img src="images/dd-2.jpg" alt="Dodge Or Die Lobby — 3"></div>
-        <div class="sl"><img src="images/dd-3.jpg" alt="Dodge Or Die Lobby — 4"></div>
-        <div class="sl"><img src="images/dd-4.jpg" alt="Dodge Or Die Lobby — 5"></div>
-        <div class="sl"><img src="images/dd-5.jpg" alt="Dodge Or Die Lobby — 6"></div>
+        <button class="arw prev" type="button" aria-label="Previous image"><svg class="ic" width="22" height="22"><use href="#i-left"/></svg></button>
+        <button class="arw next" type="button" aria-label="Next image"><svg class="ic" width="22" height="22"><use href="#i-right"/></svg></button>
+        <div class="sl act" data-title="Dodge or Die" data-sub="Lobby" aria-hidden="false"><img src="images/work/dodge-or-die-lobby.jpg" alt="Dodge Or Die Lobby"></div>
+        <div class="sl" data-title="Dodge or Die" data-sub="Lobby #2" aria-hidden="true"><img src="images/work/dod-lobby-2.jpg" alt="DOD Lobby #2" loading="lazy"></div>
+        <div class="sl" data-title="ManHunt" data-sub="Yatch" aria-hidden="true"><img src="images/work/manhunt-yatch.jpg" alt="ManHunt - Yatch" loading="lazy"></div>
+        <div class="sl" data-title="ManHunt" data-sub="Tomb" aria-hidden="true"><img src="images/work/manhunt-tomb.jpg" alt="ManHunt - Tomb" loading="lazy"></div>
+        <div class="sl" data-title="Energy Assault FPS" data-sub="Amethyst1" aria-hidden="true"><img src="images/work/ea-amethyst1.jpg" alt="EA - Amethyst1" loading="lazy"></div>
+        <div class="sl" data-title="Energy Assault FPS" data-sub="WaterfallBase" aria-hidden="true"><img src="images/work/ea-waterfallbase.jpg" alt="EA - WaterfallBase" loading="lazy"></div>
       </div>
-      <div class="show-foot">
-        <div class="dots"></div>
-        <div class="counter"><b>01</b> / 06</div>
+      <div class="strip">
+      <button class="th" type="button" aria-label="Show Dodge Or Die Lobby"><img src="images/work/dodge-or-die-lobby.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show DOD Lobby #2"><img src="images/work/dod-lobby-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show ManHunt - Yatch"><img src="images/work/manhunt-yatch.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show ManHunt - Tomb"><img src="images/work/manhunt-tomb.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show EA - Amethyst1"><img src="images/work/ea-amethyst1.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show EA - WaterfallBase"><img src="images/work/ea-waterfallbase.jpg" alt="" loading="lazy"></button>
       </div>
-    </div>
+    </section>
   </div>
 </section>
 
-<!-- TERMS -->
 <section class="sec" id="terms">
   <div class="wrap">
-    <span class="sec-k"><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>TERMS OF SERVICE</span>
-    <div class="stat-row">
-      <div class="sbit"><div class="bn">50%</div><div class="bl">Upfront to start<br>50% on delivery</div></div>
-      <div class="sbit"><div class="bn">3</div><div class="bl">Minor revisions<br>included</div></div>
-      <div class="sbit"><div class="bn">48h</div><div class="bl">Response window<br>before closing</div></div>
-      <div class="sbit"><div class="bn">100%</div><div class="bl">Inside Roblox Studio<br>parts &amp; unions</div></div>
+    <h2 class="lab">Terms of Service</h2>
+    <div class="nums">
+      <div class="num"><b>50%</b><span>upfront payment is required before starting</span></div>
+      <div class="num"><b>50%</b><span>remaining must be paid before the final builds are transferred</span></div>
+      <div class="num"><b>30%</b><span>Roblox fee covered by you when paying via Robux</span></div>
+      <div class="num"><b>3</b><span>minor revisions included</span></div>
+      <div class="num"><b>20-50%</b><span>extra charge for major changes after the blockout phase</span></div>
+      <div class="num"><b>48h</b><span>to respond to WIP updates or inquiries</span></div>
+      <div class="num"><b>20%</b><span>discount if I miss the agreed deadline due to my fault</span></div>
+      <div class="num"><b>100%</b><span>inside Roblox Studio using Parts and Unions</span></div>
     </div>
-    <div class="terms-grid">
-      <div class="note"><div class="nh"><span class="lt">A</span>Ordering Requirements</div><ul>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Detailed Brief Required:</b> Please start the conversation with a clear description of what you need, including reference images, layout sketches, or style examples. Vague greetings without details will be ignored</li>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Scope Limits:</b> I only accept small to medium-scale commissions. I do not accept open-world maps or massive cities</li>
+    <div class="terms">
+      <div class="note"><h3><i>A</i>Ordering Requirements</h3><ul>
+        <li><strong>Detailed Brief Required:</strong> Please start the conversation with a clear description of what you need, including reference images, layout sketches, or style examples. Vague greetings without details will be ignored</li>
+        <li><strong>Scope Limits:</strong> I only accept small to medium-scale commissions. I do not accept open-world maps or massive cities</li>
       </ul></div>
-      <div class="note"><div class="nh"><span class="lt">B</span>Payment &amp; Fees</div><ul>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Upfront Payment:</b> A <span class="num">50%</span> upfront payment is required before starting</li>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Final Payment:</b> The remaining <span class="num">50%</span> must be paid before the final builds are transferred</li>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Roblox Marketplace Tax:</b> If paying via Robux (Gamepass/T-Shirt), you must cover the <span class="num">30%</span> Roblox fee</li>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>No Refunds:</b> No refunds will be issued once the commission is completed/delivered</li>
+      <div class="note"><h3><i>B</i>Payment &amp; Fees</h3><ul>
+        <li><strong>Upfront Payment:</strong> A <span class="n">50%</span> upfront payment is required before starting</li>
+        <li><strong>Final Payment:</strong> The remaining <span class="n">50%</span> must be paid before the final builds are transferred</li>
+        <li><strong>Roblox Marketplace Tax:</strong> If paying via Robux (Gamepass/T-Shirt), you must cover the <span class="n">30%</span> Roblox fee</li>
+        <li><strong>No Refunds:</strong> No refunds will be issued once the commission is completed/delivered</li>
       </ul></div>
-      <div class="note"><div class="nh"><span class="lt">C</span>Progress &amp; Security</div><ul>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Anti-Snatch:</b> To prevent asset theft, I will not share or grant access to the Place file until payment is complete.</li>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Middleman:</b> Using an official middleman is highly recommended for smooth transactions.</li>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Deadlines:</b> If I fail to complete the project by the agreed deadline due to my fault, a <span class="num">20%</span> discount will be applied to the final price.</li>
+      <div class="note"><h3><i>C</i>Progress &amp; Security</h3><ul>
+        <li><strong>Anti-Snatch:</strong> To prevent asset theft, I will not share or grant access to the Place file until payment is complete.</li>
+        <li><strong>Middleman:</strong> Using an official middleman is highly recommended for smooth transactions.</li>
+        <li><strong>Deadlines:</strong> If I fail to complete the project by the agreed deadline due to my fault, a <span class="n">20%</span> discount will be applied to the final price.</li>
       </ul></div>
-      <div class="note"><div class="nh"><span class="lt">D</span>Revisions</div><ul>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Included Revisions:</b> Up to <span class="num">3</span> minor revisions (e.g., adjusting colors, moving small objects, scaling)</li>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Major Changes:</b> Any major changes to the original brief/layout after the blockout phase will incur an extra charge from <span class="num">20%</span> to <span class="num">50%</span></li>
+      <div class="note"><h3><i>D</i>Revisions</h3><ul>
+        <li><strong>Included Revisions:</strong> Up to <span class="n">3</span> minor revisions (e.g., adjusting colors, moving small objects, scaling)</li>
+        <li><strong>Major Changes:</strong> Any major changes to the original brief/layout after the blockout phase will incur an extra charge from <span class="n">20%</span> to <span class="n">50%</span></li>
       </ul></div>
-      <div class="note"><div class="nh"><span class="lt">E</span>Inactivity</div><ul>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Client Unresponsiveness:</b> If you fail to respond to WIP updates or inquiries within <span class="num">48 hours</span> without prior notice, the commission will be closed. The upfront payment will not be refunded</li>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Restarting Paused Projects:</b> If a project is closed due to inactivity, a reactivation fee of up to <span class="num">20%</span> may apply to put it back in the queue (depending on the length of inactivity)</li>
+      <div class="note"><h3><i>E</i>Inactivity</h3><ul>
+        <li><strong>Client Unresponsiveness:</strong> If you fail to respond to WIP updates or inquiries within <span class="n">48 hours</span> without prior notice, the commission will be closed. The upfront payment will not be refunded</li>
+        <li><strong>Restarting Paused Projects:</strong> If a project is closed due to inactivity, a reactivation fee of up to <span class="n">20%</span> may apply to put it back in the queue (depending on the length of inactivity)</li>
       </ul></div>
-      <div class="note"><div class="nh"><span class="lt">F</span>Copyright &amp; Usage Rights</div><ul>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Studio-Only Builds:</b> All builds are created <span class="num">100%</span> inside Roblox Studio using Parts and Unions (no external 3D software). Please account for part-count optimization.</li>
-        <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg><b>Showcase Rights:</b> I reserve the right to post screenshots, videos, or showcase the completed build in my personal portfolio (Remind me if you do not want your builds in the showcase)</li>
+      <div class="note"><h3><i>F</i>Copyright &amp; Usage Rights</h3><ul>
+        <li><strong>Studio-Only Builds:</strong> All builds are created <span class="n">100%</span> inside Roblox Studio using Parts and Unions (no external 3D software). Please account for part-count optimization.</li>
+        <li><strong>Showcase Rights:</strong> I reserve the right to post screenshots, videos, or showcase the completed build in my personal portfolio (Remind me if you do not want your builds in the showcase)</li>
       </ul></div>
     </div>
-    <div class="thanks">* Thank you for reading</div>
+    <p class="thanks">*Thank you for reading</p>
   </div>
 </section>
 
-<!-- PAYMENT/PRICE (empty on his site) -->
-<section class="sec" id="payment" style="padding-top:0">
-  <div class="wrap"><span class="sec-k empty-h"><svg class="ic" width="13" height="13"><use href="#i-cube"/></svg>PAYMENT / PRICE</span></div>
-</section>
-
-<!-- CONTACT -->
-<section class="sec" id="contact" style="padding-top:0">
+<section class="sec" id="contact" style="padding-top:8px">
   <div class="wrap">
     <div class="contact">
-      <span class="sec-k"><svg class="ic" width="13" height="13"><use href="#i-spark"/></svg>CONTACT ME FOR COMMISSIONS</span>
-      <h2>Let's build something.</h2>
-      <div class="cgrid">
-        <a class="ccard" href="mailto:nhatduy190208@gmail.com"><div class="cl"><svg class="ic" width="12" height="12"><use href="#i-mail"/></svg>GMAIL</div><div class="cv">nhatduy190208@gmail.com</div></a>
-        <a class="ccard" href="https://discord.com/users/768445951089311764" target="_blank" rel="noopener"><div class="cl"><svg class="ic" width="12" height="12"><use href="#i-chat"/></svg>DISCORD</div><div class="cv">brain1349</div></a>
-        <a class="ccard" href="https://www.roblox.com/users/1455286846/profile" target="_blank" rel="noopener"><div class="cl"><svg class="ic" width="12" height="12"><use href="#i-user"/></svg>ROBLOX</div><div class="cv">Zouie</div></a>
+      <h2>Contact me for commissions</h2>
+      <div class="ct">
+        <div class="card">
+          <a class="main" href="mailto:nhatduy190208@gmail.com"><span class="l"><svg class="ic" width="16" height="16"><use href="#i-mail"/></svg>Gmail</span><span class="v">nhatduy190208@gmail.com</span></a>
+          <button class="copy" type="button" data-copy="nhatduy190208@gmail.com" aria-label="Copy email address"><svg class="ic" width="14" height="14"><use href="#i-copy"/></svg><span>Copy</span></button>
+        </div>
+        <div class="card">
+          <a class="main" href="https://discord.com/users/768445951089311764" target="_blank" rel="noopener"><span class="l"><svg class="ic" width="16" height="16"><use href="#i-chat"/></svg>Discord</span><span class="v">brain1349</span></a>
+          <button class="copy" type="button" data-copy="brain1349" aria-label="Copy Discord username"><svg class="ic" width="14" height="14"><use href="#i-copy"/></svg><span>Copy</span></button>
+        </div>
+        <div class="card">
+          <a class="main" href="https://www.roblox.com/users/1455286846/profile" target="_blank" rel="noopener"><span class="l"><svg class="ic" width="16" height="16"><use href="#i-user"/></svg>Roblox</span><span class="v">Zouie</span></a>
+        </div>
       </div>
     </div>
   </div>
 </section>
+</main>
 
-<footer>ZOUIE · ROBLOX STUDIO BUILDER</footer>
+<footer>ZOUIE</footer>
 
 <script>
-// Slideshows
-document.querySelectorAll('.show').forEach(show=>{
-  const slides=[...show.querySelectorAll('.sl')];
-  const dotsWrap=show.querySelector('.dots');
-  const counter=show.querySelector('.counter');
-  let i=0;
-  slides.forEach((_,n)=>{const b=document.createElement('button');b.className='dot'+(n===0?' on':'');b.setAttribute('aria-label','Slide '+(n+1));b.onclick=()=>go(n);dotsWrap.appendChild(b);});
-  const dots=[...dotsWrap.children];
-  function go(n){
-    i=(n+slides.length)%slides.length;
-    slides.forEach((s,k)=>s.classList.toggle('act',k===i));
-    dots.forEach((d,k)=>d.classList.toggle('on',k===i));
-    counter.innerHTML='<b>'+String(i+1).padStart(2,'0')+'</b> / '+String(slides.length).padStart(2,'0');
+(function(){
+  // slideshows
+  document.querySelectorAll('.show').forEach(function(show){
+    var slides=[].slice.call(show.querySelectorAll('.sl')),
+        thumbs=[].slice.call(show.querySelectorAll('.th')),
+        strip=show.querySelector('.strip'),
+        game=show.querySelector('.st-game'),cap=show.querySelector('.st-cap'),count=show.querySelector('.counter'),
+        stage=show.querySelector('.stage'),i=0,total=slides.length;
+    function pad(n){return String(n).padStart(2,'0')}
+    function go(n){
+      i=(n+total)%total;
+      slides.forEach(function(s,k){var on=k===i;s.classList.toggle('act',on);s.setAttribute('aria-hidden',on?'false':'true')});
+      thumbs.forEach(function(t,k){var on=k===i;t.classList.toggle('on',on);t.setAttribute('aria-current',on?'true':'false')});
+      var s=slides[i];
+      game.textContent=s.dataset.title;cap.textContent=s.dataset.sub||'';
+      count.textContent=pad(i+1)+' / '+pad(total);
+      var t=thumbs[i];strip.scrollTo({left:t.offsetLeft-strip.clientWidth/2+t.clientWidth/2,behavior:'smooth'});
+      var nx=slides[(i+1)%total].querySelector('img');if(nx&&nx.loading==='lazy')nx.loading='eager';
+    }
+    show.querySelector('.prev').addEventListener('click',function(){go(i-1)});
+    show.querySelector('.next').addEventListener('click',function(){go(i+1)});
+    thumbs.forEach(function(t,k){t.addEventListener('click',function(){go(k)})});
+    show.addEventListener('keydown',function(e){
+      if(e.key==='ArrowLeft'){go(i-1);e.preventDefault()}
+      else if(e.key==='ArrowRight'){go(i+1);e.preventDefault()}
+    });
+    var x0=null;
+    stage.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+    stage.addEventListener('touchend',function(e){
+      if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;
+      if(Math.abs(dx)>40)go(dx<0?i+1:i-1);
+    });
+    go(0);
+  });
+
+  // copy buttons
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var text=b.dataset.copy,label=b.querySelector('span');
+      function done(){b.classList.add('done');label.textContent='Copied';setTimeout(function(){b.classList.remove('done');label.textContent='Copy'},1600)}
+      if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done,fallback)}else fallback();
+      function fallback(){var a=document.createElement('textarea');a.value=text;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(a)}
+    });
+  });
+
+  // nav highlight
+  var links=[].slice.call(document.querySelectorAll('.links a'));
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){links.forEach(function(a){a.classList.remove('on')});var a=map[e.target.id];if(a)a.classList.add('on')}
+    })},{rootMargin:'-35% 0px -55% 0px'});
+    ['about','work','terms','contact'].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
+
+    // reveal
+    var els=[].slice.call(document.querySelectorAll('.panel,.credit,.show,.note,.num,.years,.contact'));
+    els.forEach(function(e){e.classList.add('r')});
+    var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){ro.observe(e)});
+    setTimeout(function(){els.forEach(function(e){e.classList.add('on')})},1500);
   }
-  show.querySelector('.prev').onclick=()=>go(i-1);
-  show.querySelector('.next').onclick=()=>go(i+1);
-});
-// Reveal
-const t=document.querySelectorAll('.sec,.yearsbar,.panel,.credit,.show,.note,.sbit,.avcard');
-t.forEach(e=>e.classList.add('r'));
-if('IntersectionObserver' in window){
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px -6% 0px'});
-  t.forEach(e=>io.observe(e));
-  setTimeout(()=>t.forEach(e=>e.classList.add('on')),1200);
-}else t.forEach(e=>e.classList.add('on'));
+})();
 </script>
 </body>
 </html>
