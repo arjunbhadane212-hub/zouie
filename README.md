@@ -1,19 +1,24 @@
 # Zouie
 
 Portfolio for Zouie, Roblox Studio builder. Static site: `index.html` plus `images/`.
-
-All copy is taken from the original Google Sites page (https://sites.google.com/view/zouie/home).
+All copy is taken verbatim from the original Google Sites page (https://sites.google.com/view/zouie/home).
 
 ## Run locally
-
 ```bash
 python3 -m http.server 4710
 ```
-
 Open http://localhost:4710.
 
-## Notes
+## Design
+Dark, cinematic, motion-led (Framer-style). Bricolage Grotesque display + Inter body + Instrument Serif
+italic accents, on near-black with a single champagne accent. Smooth scrolling (Lenis), scroll-reveal with
+stagger, hero entrance, count-up, marquee, magnetic buttons, grain + scroll-progress. Honours
+prefers-reduced-motion.
 
-- Project slideshows: each slide uses the caption from the original site. Slides from ManHunt, Dodge or Die, Energy Assault FPS and Silent Assassin show the game name as the title.
-- All 38 images from the original carousels are included. 21 were downloaded directly (up to 1100px wide); the other 17 could not be downloaded and were captured from the live carousel (about 786px wide), so they are a little softer.
-- Deployed on Vercel from the `main` branch.
+## Projects
+Two slideshows (24 + 14 = all 38 original carousel images), each slide titled by its original caption;
+game shots show the game name. Crossfade, idle zoom, progress bar, filmstrip, arrows, keyboard and swipe.
+17 of the 38 were screen-captured from the live carousel (~786px) and are a little softer than the other 21.
+
+## Deploy
+On Vercel from the `main` branch; every push redeploys.
