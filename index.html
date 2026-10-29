@@ -3,502 +3,467 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Zouie — Roblox Studio Builder</title>
-<meta name="description" content="Zouie — Roblox Studio builder with +5 years of experience. Small to medium-scale commissions, built 100% inside Roblox Studio using Parts and Unions.">
-<meta name="theme-color" content="#0b0b0d">
-<meta property="og:title" content="Zouie — Roblox Studio Builder">
-<meta property="og:description" content="+5 years building worlds inside Roblox Studio. Commissions open.">
+<title>Zouie | Roblox Studio Builder</title>
+<meta name="description" content="Zouie, Roblox Studio builder with +5 years of experience. Small to medium-scale commissions built 100% inside Roblox Studio with Parts and Unions.">
+<meta property="og:title" content="Zouie | Roblox Studio Builder">
 <meta property="og:image" content="images/zouie-avatar.png">
 <link rel="icon" href="images/zouie-headshot.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0b0b0d;--bg2:#101014;--panel:#141419;--panel2:#1b1b22;
-  --text:#eceae4;--muted:#8d8b85;--faint:#5c5a56;
-  --line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.055);
-  --accent:#c9a97e;--accent2:#e0c9a6;--accent-soft:rgba(201,169,126,.12);
-  --display:"Bricolage Grotesque",system-ui,sans-serif;
-  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
-  --serif:"Instrument Serif",Georgia,serif;
-  --ease:cubic-bezier(.16,1,.3,1);
-  --maxw:1240px;
+  --paper:#f2eee3;--card:#fffdf8;--ink:#1a1a1c;--ink2:#4a4943;--line:rgba(26,26,28,.07);
+  --yellow:#f6c935;--dark:#1a1a1c;
+  --sans:"Space Grotesk",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --pixel:"Silkscreen",ui-monospace,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-html.lenis,html.lenis body{height:auto}
-.lenis.lenis-smooth{scroll-behavior:auto!important}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:28px 28px;overflow-x:clip}
 a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 img{display:block;max-width:100%}
-::selection{background:var(--accent);color:#0b0b0d}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
 .ic{display:inline-block;vertical-align:middle;flex:none}
-
-/* ambient background */
-.amb{position:fixed;inset:0;z-index:-2;pointer-events:none;background:
-  radial-gradient(900px 600px at 78% -5%,rgba(201,169,126,.08),transparent 60%),
-  radial-gradient(1000px 700px at 10% 110%,rgba(90,110,160,.07),transparent 60%),
-  var(--bg)}
-.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;mix-blend-mode:overlay}
-.grain svg{width:100%;height:100%}
-
-/* scroll progress */
-.sprog{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:120}
-
-.skip{position:absolute;left:-999px;top:8px;background:#fff;color:#000;padding:8px 14px;z-index:200}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;border-radius:8px;z-index:100}
 .skip:focus{left:12px}
 
-/* header */
-.hdr{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s var(--ease),border-color .4s,backdrop-filter .4s}
-.hdr.scrolled{background:rgba(11,11,13,.72);backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid var(--line2)}
-.hdr-in{max-width:var(--maxw);margin:0 auto;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;transition:padding .4s var(--ease)}
-.hdr.scrolled .hdr-in{padding:14px 40px}
-.brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:.02em}
-.brand img{width:30px;height:30px;border-radius:50%;object-fit:cover;filter:grayscale(.1)}
-.nav{display:flex;gap:34px}
-.nav a{position:relative;font-size:14px;color:var(--muted);transition:color .25s;padding:4px 0}
-.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:var(--accent);transition:right .4s var(--ease)}
-.nav a:hover{color:var(--text)}
-.nav a.on{color:var(--text)}
-.nav a.on::after{right:0}
-.cta{position:relative;display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:#0b0b0d;background:var(--accent);padding:11px 20px;border-radius:100px;overflow:hidden;transition:transform .3s var(--ease)}
-.cta span{position:relative;z-index:1}
-.cta::before{content:"";position:absolute;inset:0;background:var(--accent2);transform:translateY(101%);transition:transform .4s var(--ease);z-index:0}
-.cta:hover::before{transform:translateY(0)}
-
-/* reveal */
-.rv{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
-.rv.in{opacity:1;transform:none}
-.clip{display:block;overflow:hidden}
-.clip>span{display:block;transform:translateY(110%);transition:transform 1.05s var(--ease)}
-.clip.in>span,.in>.clip>span{transform:none}
+/* nav */
+.nav{position:sticky;top:14px;z-index:60;padding:0 28px;margin-top:14px}
+.nav-in{max-width:1120px;margin:0 auto;background:var(--card);border:2px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);
+  display:flex;align-items:center;justify-content:space-between;padding:8px 10px 8px 12px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--pixel);font-size:14px;letter-spacing:.04em}
+.logo img{width:30px;height:30px;border-radius:50%;border:2px solid var(--ink);object-fit:cover;background:var(--yellow)}
+.links{display:flex;gap:2px}
+.links a{font-weight:600;font-size:14px;padding:7px 13px;border-radius:9px;border:2px solid transparent;transition:background .15s}
+.links a:hover{background:rgba(26,26,28,.07)}
+.links a.on{background:var(--yellow);border-color:var(--ink)}
+.cta{font-weight:600;font-size:14px;background:var(--ink);color:#fff;padding:9px 16px;border-radius:10px;transition:transform .12s}
+.cta:hover{transform:translateY(-1px)}
 
 /* hero */
-.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:130px 0 70px}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center;width:100%}
-.eyebrow{display:inline-flex;align-items:center;gap:13px;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:26px}
-.eyebrow::before{content:"";width:34px;height:1px;background:var(--accent);display:inline-block}
-.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(84px,15vw,216px);line-height:.86;letter-spacing:-.04em;color:var(--text)}
-.hero .tos{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.6vw,30px);color:var(--muted);margin-top:26px}
-.hero-actions{margin-top:40px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
-.btn-lg{position:relative;display:inline-flex;align-items:center;gap:11px;font-size:15px;font-weight:500;color:#0b0b0d;background:var(--accent);padding:16px 30px;border-radius:100px;overflow:hidden;will-change:transform}
-.btn-lg span{position:relative;z-index:1}
-.btn-lg::before{content:"";position:absolute;inset:0;background:var(--accent2);transform:translateY(101%);transition:transform .45s var(--ease)}
-.btn-lg:hover::before{transform:translateY(0)}
-.ghost{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--text);opacity:.85;transition:opacity .25s,gap .3s var(--ease)}
-.ghost .ic{transition:transform .35s var(--ease)}
-.ghost:hover{opacity:1;gap:14px}
-.ghost:hover .ic{transform:translateX(3px)}
+.hero{padding:64px 0 28px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center}
+.sub{font-weight:600;font-size:17px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.namebox{display:inline-block;margin:14px 0 12px;border:3px solid var(--ink);border-radius:18px;background:var(--card);box-shadow:6px 7px 0 var(--ink);padding:14px 38px 6px}
+.nm{font-family:var(--pixel);font-weight:700;font-size:clamp(54px,11vw,124px);line-height:.95}
+.tos{font-weight:700;font-style:italic;font-size:19px}
+.btns{margin-top:26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.btn{background:var(--ink);color:#fff;font-weight:600;padding:13px 24px;border-radius:12px;box-shadow:4px 4px 0 var(--yellow);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--yellow)}
+.txtlink{font-weight:600;border-bottom:2px solid var(--ink);padding-bottom:1px}
+.txtlink:hover{background:var(--yellow)}
+.avatar{display:block;background:var(--card);border:3px solid var(--ink);border-radius:20px;box-shadow:6px 7px 0 var(--ink);padding:12px;transition:transform .15s}
+.avatar:hover{transform:translate(-2px,-2px)}
+.avatar .in{background:#e4dece;border:2px solid var(--ink);border-radius:12px;overflow:hidden;aspect-ratio:1/1;display:grid;place-items:center}
+.avatar .in img{width:100%;height:100%;object-fit:contain}
+.avatar .cap{display:flex;align-items:center;justify-content:space-between;padding:10px 6px 2px;font-weight:600;font-size:14px}
 
-.portrait{position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(165deg,var(--panel2),var(--panel));border:1px solid var(--line);will-change:transform}
-.portrait .frame{position:relative;padding:30px 30px 0;overflow:hidden}
-.portrait .frame::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 0%,transparent 55%,rgba(0,0,0,.35));pointer-events:none}
-.portrait img{width:100%;max-width:380px;margin:0 auto;animation:float 7s ease-in-out infinite;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-.portrait .meta{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-top:1px solid var(--line);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.portrait .meta .ic{color:var(--accent);transition:transform .35s var(--ease)}
-.portrait:hover .meta .ic{transform:translate(3px,-3px)}
-.scrollcue{position:absolute;bottom:34px;left:40px;display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
-.scrollcue i{display:block;width:40px;height:1px;background:var(--faint);position:relative;overflow:hidden}
-.scrollcue i::after{content:"";position:absolute;inset:0;background:var(--accent);transform:translateX(-100%);animation:cue 2.2s var(--ease) infinite}
-@keyframes cue{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
-
-/* marquee */
-.marq{border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);padding:26px 0;overflow:hidden;white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.marq-track{display:inline-flex;gap:0;animation:marq 32s linear infinite;will-change:transform}
-.marq:hover .marq-track{animation-play-state:paused}
-.marq-track span{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.4vw,42px);letter-spacing:-.02em;padding:0 34px;color:var(--text)}
-.marq-track i{font-style:normal;color:var(--accent);font-size:16px;align-self:center}
-@keyframes marq{to{transform:translateX(-50%)}}
+.years{margin-top:44px;display:flex;border:2px solid var(--ink);border-radius:16px;overflow:hidden;box-shadow:5px 5px 0 var(--ink);background:var(--card)}
+.years b{background:var(--yellow);border-right:2px solid var(--ink);padding:14px 32px;font-family:var(--pixel);font-size:clamp(46px,8vw,86px);line-height:1;display:flex;align-items:center}
+.years span{padding:18px 26px;font-size:clamp(20px,2.7vw,32px);font-weight:700;line-height:1.15;display:flex;align-items:center}
 
 /* sections */
-.sec{padding:120px 0}
-.sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:64px}
-.sec-head .no{font-family:var(--display);font-size:14px;letter-spacing:.1em;color:var(--accent);padding-top:6px}
-.sec-head h2{font-family:var(--display);font-weight:700;font-size:clamp(38px,5.5vw,76px);line-height:.98;letter-spacing:-.03em}
-.lead{font-family:var(--display);font-weight:500;font-size:clamp(26px,3.6vw,46px);line-height:1.22;letter-spacing:-.02em;max-width:900px}
-.lead em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent)}
+.sec{padding:64px 0}
+h2.lab{display:inline-block;font-size:15px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--card);border:2px solid var(--ink);border-radius:9px;padding:6px 13px;box-shadow:2px 2px 0 var(--ink)}
+.hello{font-size:clamp(22px,2.8vw,32px);font-weight:700;line-height:1.25;max-width:780px;margin-top:24px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+.panel{background:var(--card);border:2px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);padding:24px}
+.panel h3{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:18px}
+.suits{list-style:none;display:grid;gap:10px}
+.suits li{display:flex;align-items:center;gap:11px;font-weight:600;font-size:17px}
+.suits .ic{background:var(--yellow);border:2px solid var(--ink);border-radius:6px;padding:2px;width:24px;height:24px}
+.excel{margin-top:20px;padding-top:16px;border-top:2px dashed var(--ink);font-style:italic;font-weight:600}
+.nolist{list-style:none;display:grid;gap:11px}
+.nolist li{display:flex;gap:11px;align-items:flex-start;color:var(--ink2);font-weight:500}
+.nolist .ic{margin-top:4px}
+.credits{margin-top:40px}
+.credits h3{font-size:19px;font-weight:700;margin-bottom:16px}
+.cgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.credit{display:flex;flex-direction:column;justify-content:space-between;gap:16px;min-height:112px;background:var(--card);border:2px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);padding:15px;transition:transform .12s,box-shadow .12s,background .12s}
+.credit:hover{transform:translate(-1px,-2px);box-shadow:4px 5px 0 var(--ink);background:var(--yellow)}
+.credit b{font-size:17px;line-height:1.15}
+.credit small{display:flex;align-items:center;gap:6px;font-weight:600;font-size:12.5px;color:var(--ink2)}
+.credit:hover small{color:var(--ink)}
 
-.two{display:grid;grid-template-columns:1fr 1fr;gap:70px;margin-top:72px}
-.col-h{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:8px}
-.rows{list-style:none}
-.rows li{display:flex;align-items:center;gap:16px;padding:19px 0;border-bottom:1px solid var(--line2);font-size:19px;font-weight:400}
-.rows .mk{width:26px;height:26px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
-.rows.no .mk{background:transparent;border:1px solid rgba(255,255,255,.14);color:var(--faint)}
-.rows.no li{color:var(--muted)}
-.excel{margin-top:24px;font-family:var(--serif);font-style:italic;font-size:21px;color:var(--muted)}
-
-/* credits */
-.credits{margin-top:84px}
-.credits .col-h{margin-bottom:0}
-.credit{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px;padding:26px 0;border-bottom:1px solid var(--line2);position:relative}
-.credit .idx{font-family:var(--display);font-size:13px;color:var(--faint);width:30px}
-.credit b{font-family:var(--display);font-weight:600;font-size:clamp(24px,3vw,38px);letter-spacing:-.02em;transition:transform .4s var(--ease),color .3s}
-.credit .go{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .3s,transform .4s var(--ease)}
-.credit::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--accent);transition:width .5s var(--ease)}
-.credit:hover::after{width:100%}
-.credit:hover b{transform:translateX(10px);color:var(--accent2)}
-.credit:hover .go{color:var(--accent);transform:translateX(-4px)}
-
-/* experience band */
-.band{position:relative;padding:96px 0;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);overflow:hidden}
-.band-in{display:flex;align-items:center;gap:52px;flex-wrap:wrap}
-.band .big{font-family:var(--display);font-weight:700;font-size:clamp(92px,16vw,188px);line-height:.8;letter-spacing:-.04em;color:var(--accent)}
-.band .txt{font-family:var(--display);font-weight:500;font-size:clamp(24px,3.4vw,42px);line-height:1.1;letter-spacing:-.02em;max-width:520px}
-.band .txt small{display:block;font-family:var(--sans);font-weight:400;font-size:15px;letter-spacing:.02em;color:var(--muted);margin-top:14px;text-transform:none}
-
-/* gallery */
-.show{margin-bottom:70px}
-.show:last-child{margin-bottom:0}
-.show-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:20px}
-.st-game{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.6vw,46px);letter-spacing:-.025em;line-height:1}
-.st-cap{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-top:10px}
+/* slideshow */
+.show{background:var(--card);border:2px solid var(--ink);border-radius:20px;box-shadow:6px 7px 0 var(--ink);overflow:hidden;margin-top:26px}
+.show-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:16px 22px;border-bottom:2px solid var(--ink)}
+.st-game{font-size:clamp(22px,3vw,32px);font-weight:700;line-height:1.1}
+.st-cap{font-weight:600;color:var(--ink2);margin-top:3px;font-size:15px}
 .st-cap:empty{display:none}
-.counter{font-family:var(--display);font-size:17px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
-.counter b{color:var(--text)}
-.stage{position:relative;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/9;border:1px solid var(--line);touch-action:pan-y}
-.bar{position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.08);z-index:6}
-.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .5s var(--ease)}
-.sl{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .6s var(--ease)}
+.counter{font-family:var(--pixel);font-size:16px;white-space:nowrap}
+.stage{position:relative;background:var(--dark);aspect-ratio:16/9;touch-action:pan-y}
+.sl{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .4s}
 .sl.act{opacity:1;visibility:visible}
-.sl img{width:100%;height:100%;object-fit:contain;transform:scale(1.001);transition:transform 9s ease-out}
-.sl.act img{transform:scale(1.045)}
-.arw{position:absolute;top:50%;transform:translateY(-50%);z-index:7;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;background:rgba(14,14,18,.5);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);opacity:0;transition:opacity .35s,background .25s,transform .25s}
-.stage:hover .arw{opacity:1}
-.arw:hover{background:var(--accent);color:#0b0b0d;border-color:var(--accent)}
-.arw.prev{left:18px}.arw.next{right:18px}
-.arw.prev:active{transform:translateY(-50%) translateX(-3px)}
-.arw.next:active{transform:translateY(-50%) translateX(3px)}
-.cap-over{position:absolute;left:18px;bottom:18px;z-index:6;display:flex;align-items:center;gap:12px;padding:10px 16px;border-radius:100px;background:rgba(11,11,13,.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);font-size:13px;letter-spacing:.08em;pointer-events:none}
-.cap-over b{font-weight:600}.cap-over s{text-decoration:none;color:var(--accent)}
-.strip{display:flex;gap:10px;overflow-x:auto;padding:16px 2px 4px;scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
-.strip::-webkit-scrollbar{height:6px}.strip::-webkit-scrollbar-thumb{background:var(--faint);border-radius:3px}
-.th{flex:none;width:118px;aspect-ratio:16/10;border-radius:8px;overflow:hidden;padding:0;background:#000;position:relative;opacity:.42;transition:opacity .3s,transform .3s var(--ease)}
+.sl img{width:100%;height:100%;object-fit:cover}
+.arw{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:48px;height:48px;border-radius:50%;background:var(--card);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);display:grid;place-items:center;transition:background .12s}
+.arw:hover{background:var(--yellow)}
+.arw:active{box-shadow:1px 1px 0 var(--ink);margin-top:2px}
+.arw.prev{left:16px}.arw.next{right:16px}
+.strip{display:flex;gap:8px;overflow-x:auto;padding:12px 16px;border-top:2px solid var(--ink);scrollbar-width:thin;background:#f7f3e8}
+.th{flex:none;width:96px;aspect-ratio:16/10;border:2px solid transparent;border-radius:8px;overflow:hidden;opacity:.6;transition:opacity .15s;padding:0;background:var(--dark)}
 .th img{width:100%;height:100%;object-fit:cover}
-.th:hover{opacity:.8;transform:translateY(-3px)}
-.th.on{opacity:1;box-shadow:0 0 0 2px var(--accent)}
+.th:hover{opacity:1}
+.th.on{opacity:1;border-color:var(--ink);box-shadow:0 0 0 2px var(--yellow)}
 
 /* terms */
-.figs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line2);border:1px solid var(--line2);border-radius:16px;overflow:hidden}
-.fig{background:var(--bg);padding:30px 26px 28px}
-.fig b{font-family:var(--display);font-weight:700;font-size:clamp(40px,4.6vw,62px);line-height:1;letter-spacing:-.03em;color:var(--text);display:block}
-.fig span{display:block;margin-top:13px;font-size:14px;line-height:1.5;color:var(--muted)}
-.clauses{margin-top:64px;border-top:1px solid var(--line)}
-.clause{display:grid;grid-template-columns:320px 1fr;gap:54px;padding:40px 0;border-bottom:1px solid var(--line2)}
-.clause h3{display:flex;align-items:baseline;gap:20px;font-family:var(--display);font-weight:600;font-size:26px;letter-spacing:-.02em}
-.clause h3 i{font-style:normal;font-weight:700;font-size:40px;color:var(--accent);line-height:1}
-.clause ul{list-style:none;display:grid;gap:18px}
-.clause li{font-size:16.5px;line-height:1.7;color:var(--muted);padding-left:22px;position:relative}
-.clause li::before{content:"";position:absolute;left:0;top:13px;width:9px;height:1px;background:var(--accent)}
-.clause li strong{color:var(--text);font-weight:600}
-.clause .n{color:var(--accent);font-weight:600}
-.thanks{margin-top:34px;font-family:var(--serif);font-style:italic;font-size:21px;color:var(--muted);text-align:center}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+.num{background:var(--dark);color:#fff;border-radius:14px;padding:18px 20px;box-shadow:4px 4px 0 var(--yellow)}
+.num b{display:block;font-family:var(--pixel);font-size:clamp(30px,4vw,46px);line-height:1;color:var(--yellow)}
+.num span{display:block;margin-top:10px;font-size:13.5px;line-height:1.35;color:#ddd9cc}
+.terms{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px;align-items:start}
+.note{background:var(--card);border:2px solid var(--ink);border-radius:8px;box-shadow:4px 4px 0 var(--ink);padding:22px}
+.note h3{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;margin-bottom:14px;line-height:1.2}
+.note h3 i{font-style:normal;font-family:var(--pixel);font-size:15px;background:var(--ink);color:#fff;min-width:28px;height:28px;border-radius:7px;display:grid;place-items:center}
+.note ul{list-style:none;display:grid;gap:13px}
+.note li{font-size:14.5px;line-height:1.5;color:var(--ink2);padding-left:18px;position:relative}
+.note li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;background:var(--ink)}
+.note li strong{color:var(--ink);font-weight:700}
+.note .n{font-family:var(--pixel);color:var(--ink);font-size:15px;background:var(--yellow);padding:0 4px;border-radius:3px}
+.thanks{margin-top:28px;font-weight:600;font-style:italic}
 
 /* contact */
-.contact{position:relative;padding:130px 0 120px;border-top:1px solid var(--line2);overflow:hidden}
-.contact::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(800px 500px at 50% 0%,rgba(201,169,126,.08),transparent 65%)}
-.contact h2{font-family:var(--display);font-weight:700;font-size:clamp(44px,8vw,120px);line-height:.92;letter-spacing:-.035em;text-align:center;margin:26px 0 68px}
-.contact .eyebrow{display:flex;justify-content:center}
-.crow{display:grid;grid-template-columns:160px 1fr auto;align-items:center;gap:28px;padding:30px 0;border-top:1px solid var(--line2)}
-.crow:last-of-type{border-bottom:1px solid var(--line2)}
-.crow .l{display:flex;align-items:center;gap:11px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.crow .l .ic{color:var(--accent)}
-.crow .v{font-family:var(--display);font-weight:600;font-size:clamp(24px,3.4vw,40px);letter-spacing:-.02em;word-break:break-word;transition:color .3s}
-a.v:hover{color:var(--accent)}
-.cbtn{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:11px 18px;transition:color .25s,border-color .25s,background .25s}
-.cbtn:hover,.cbtn.done{color:#0b0b0d;background:var(--accent);border-color:var(--accent)}
+.contact{background:var(--dark);color:#fff;border-radius:24px;box-shadow:7px 8px 0 var(--yellow);padding:50px 42px}
+.contact h2{font-size:clamp(28px,4.6vw,52px);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:.01em}
+.ct{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.card{position:relative;background:#27272a;border:2px solid #3b3b3f;border-radius:16px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--yellow);transform:translateY(-2px)}
+.card .main{display:block;padding:20px 20px 18px}
+.card .l{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#a7a498;text-transform:uppercase;letter-spacing:.06em}
+.card .v{font-size:19px;font-weight:600;margin-top:12px;word-break:break-all}
+.card:hover .v{color:var(--yellow)}
+.copy{position:absolute;top:12px;right:12px;display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;background:#3a3a3e;border-radius:8px;padding:6px 10px;color:#eee;transition:background .12s}
+.copy:hover{background:var(--yellow);color:var(--ink)}
+.copy.done{background:var(--yellow);color:var(--ink)}
+footer{padding:34px 0 46px;text-align:center;font-family:var(--pixel);font-size:14px;letter-spacing:.06em}
 
-footer{border-top:1px solid var(--line2);padding:30px 0}
-.foot{max-width:var(--maxw);margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:13px;color:var(--muted);letter-spacing:.03em}
-.foot b{font-family:var(--display);color:var(--text);letter-spacing:.04em}
-.foot a:hover{color:var(--text)}
+.r{opacity:0;transform:translateY(24px) scale(.985);transition:opacity .7s ease,transform .8s cubic-bezier(.16,1,.3,1)}
+.r.on{opacity:1;transform:none}
 
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important}
-  .rv{opacity:1;transform:none;transition:none}
-  .clip>span{transform:none}
-  .sl img,.sl.act img{transition:none;transform:none}
-  html{scroll-behavior:auto}
+/* big stats */
+.stats{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.stat{background:var(--card);border:3px solid var(--ink);border-radius:18px;box-shadow:7px 8px 0 var(--ink);padding:24px;display:flex;flex-direction:column;gap:12px;transition:transform .16s,box-shadow .16s}
+.stat:hover{transform:translate(-2px,-4px);box-shadow:11px 13px 0 var(--ink)}
+.stat:first-child{background:var(--yellow)}
+.stat b{font-family:var(--pixel);font-size:clamp(50px,8.5vw,96px);line-height:.8;letter-spacing:.01em}
+.stat span{font-weight:600;font-size:15px;line-height:1.3;color:var(--ink2)}
+.stat:first-child span{color:var(--ink)}
+
+/* marquee */
+.marq{border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap;padding:15px 0}
+.marq-t{display:inline-flex;align-items:center;animation:marq 24s linear infinite;will-change:transform}
+.marq:hover .marq-t{animation-play-state:paused}
+.marq-t span{font-family:var(--pixel);font-size:clamp(18px,2.8vw,28px);padding:0 24px}
+.marq-t i{color:var(--yellow);font-style:normal;font-size:15px}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* reviews */
+.rv-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.tag{font-family:var(--pixel);font-size:11px;background:var(--yellow);border:2px solid var(--ink);border-radius:7px;padding:5px 9px;box-shadow:2px 2px 0 var(--ink);letter-spacing:.02em}
+.revrow{overflow:hidden;white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.revrow+.revrow{margin-top:18px}
+.revtrack{display:inline-flex;gap:18px;padding-right:18px;animation:marq 52s linear infinite;will-change:transform}
+.revrow.rev2 .revtrack{animation-duration:66s;animation-direction:reverse}
+.revrow:hover .revtrack{animation-play-state:paused}
+.rev{white-space:normal;flex:none;width:350px;background:var(--card);border:2px solid var(--ink);border-radius:16px;box-shadow:5px 6px 0 var(--ink);padding:22px}
+.rev .stars{font-size:17px;letter-spacing:3px;color:var(--yellow);-webkit-text-stroke:1px var(--ink)}
+.rev p{font-weight:500;font-size:16px;line-height:1.45;margin:13px 0 16px}
+.rev .who{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:600;color:var(--ink2)}
+.rev .who .av{width:32px;height:32px;border-radius:50%;background:var(--yellow);border:2px solid var(--ink);display:grid;place-items:center;font-family:var(--pixel);font-size:12px;color:var(--ink)}
+
+@media (prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none}.sl{transition:none}.marq-t,.revtrack{animation:none}html{scroll-behavior:auto}}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .avatar{max-width:300px}
+  .cols,.terms,.ct{grid-template-columns:1fr}
+  .cgrid{grid-template-columns:repeat(2,1fr)}
+  .nums{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:1fr}
+  .rev{width:280px}
+  .logo span{display:none}
+  .links a{padding:7px 9px;font-size:13px}
+  .cta{display:none}
+  .nav{padding:0 14px}.wrap{padding:0 18px}
+  .arw{width:40px;height:40px}.arw.prev{left:8px}.arw.next{right:8px}
+  .contact{padding:34px 22px}
 }
-
-@media(max-width:940px){
-  .wrap,.hdr-in,.foot{padding-left:22px;padding-right:22px}
-  .nav{display:none}
-  .hero{min-height:auto;padding:120px 0 60px}
-  .hero-grid{grid-template-columns:1fr;gap:46px}
-  .portrait{max-width:420px}
-  .scrollcue{display:none}
-  .sec{padding:80px 0}
-  .sec-head{margin-bottom:44px}
-  .two{grid-template-columns:1fr;gap:48px;margin-top:52px}
-  .band-in{gap:26px}
-  .figs{grid-template-columns:repeat(2,1fr)}
-  .clause{grid-template-columns:1fr;gap:18px;padding:32px 0}
-  .crow{grid-template-columns:1fr;gap:12px}
-  .crow .l{order:-1}
-  .arw{opacity:1;width:46px;height:46px}
-  .contact{padding:84px 0 90px}
-  .foot{flex-direction:column;align-items:flex-start;gap:8px}
+@media(max-width:560px){
+  .nav-in{gap:6px;padding:8px}
+  .logo img{width:26px;height:26px}
+  .links{gap:0}
+  .links a{padding:6px 7px;font-size:12px}
+  .rv-top{gap:10px}.tag{font-size:10px}
 }
 </style>
 </head>
 <body id="top">
 <a class="skip" href="#about">Skip to content</a>
-<div class="amb"></div>
-<div class="grain"><svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg></div>
-<div class="sprog" id="sprog"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<symbol id="i-check" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-<symbol id="i-x" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-<symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-<symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-<symbol id="i-out" viewBox="0 0 24 24"><path d="M8 16L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
-<symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
-<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
-<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 8V5.5A1.5 1.5 0 0014.5 4h-9A1.5 1.5 0 004 5.5v9A1.5 1.5 0 005.5 16H8" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-out" viewBox="0 0 24 24"><path d="M8 16L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 </defs></svg>
 
-<header class="hdr" id="hdr">
-  <div class="hdr-in">
-    <a class="brand" href="#top"><img src="images/zouie-headshot.png" alt="">Zouie</a>
-    <nav class="nav" aria-label="Main">
+<nav class="nav" aria-label="Main">
+  <div class="nav-in">
+    <a class="logo" href="#top"><img src="images/zouie-headshot.png" alt=""><span>ZOUIE</span></a>
+    <div class="links">
       <a href="#about">About</a>
       <a href="#work">Projects</a>
+      <a href="#reviews">Reviews</a>
       <a href="#terms">Terms</a>
       <a href="#contact">Contact</a>
-    </nav>
-    <a class="cta" href="#contact" data-magnetic><span>Commission me</span></a>
+    </div>
+    <a class="cta" href="#contact">Commission me</a>
   </div>
-</header>
+</nav>
 
 <main>
-<section class="hero">
+<header class="hero">
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow rv">Roblox Studio Builder</div>
-        <h1 class="clip"><span>Zouie</span></h1>
-        <p class="tos rv">Read ToS below</p>
-        <div class="hero-actions rv">
-          <a class="btn-lg" href="#contact" data-magnetic><span>Commission me</span><svg class="ic" width="17" height="17" style="position:relative;z-index:1"><use href="#i-arrow"/></svg></a>
-          <a class="ghost" href="#terms">Terms of Service <svg class="ic" width="17" height="17"><use href="#i-arrow"/></svg></a>
+        <h1><span class="namebox"><span class="nm">ZOUIE</span></span></h1>
+        <p class="sub">Roblox Studio Builder</p>
+        <p class="tos">Read ToS below</p>
+        <div class="btns">
+          <a class="btn" href="#contact">Commission me</a>
+          <a class="txtlink" href="#terms">Terms of Service</a>
         </div>
       </div>
-      <a class="portrait rv" href="https://www.roblox.com/users/1455286846/profile" target="_blank" rel="noopener" aria-label="Zouie on Roblox (opens in a new tab)">
-        <div class="frame"><img src="images/zouie-avatar.png" alt="Zouie's Roblox avatar" width="560" height="560"></div>
-        <div class="meta"><span>Roblox — Zouie</span><svg class="ic" width="18" height="18"><use href="#i-out"/></svg></div>
+      <a class="avatar" href="https://www.roblox.com/users/1455286846/profile" target="_blank" rel="noopener" aria-label="Zouie on Roblox (opens in a new tab)">
+        <div class="in"><img src="images/zouie-avatar.png" alt="Zouie's Roblox avatar" width="560" height="560"></div>
+        <div class="cap"><span>Roblox: Zouie</span><svg class="ic" width="18" height="18"><use href="#i-out"/></svg></div>
       </a>
     </div>
+    <div class="stats">
+      <div class="stat"><b data-count="5" data-prefix="+">+5</b><span>Years of experience<br>building in Roblox Studio</span></div>
+      <div class="stat"><b data-count="5" data-pad="2">05</b><span>Games contributed to<br>as a builder</span></div>
+      <div class="stat"><b data-count="38" data-pad="2">38</b><span>Builds shown<br>in the showcase</span></div>
+    </div>
   </div>
-  <div class="scrollcue"><span>Scroll</span><i></i></div>
-</section>
+</header>
 
-<div class="marq" aria-hidden="true"><div class="marq-track">
-  <span>ManHunt</span><i>◆</i><span>Dodge or Die</span><i>◆</i><span>Energy Assault FPS</span><i>◆</i><span>Epic Minigames</span><i>◆</i><span>Silent Assassin</span><i>◆</i>
-  <span>ManHunt</span><i>◆</i><span>Dodge or Die</span><i>◆</i><span>Energy Assault FPS</span><i>◆</i><span>Epic Minigames</span><i>◆</i><span>Silent Assassin</span><i>◆</i>
+<div class="marq" aria-hidden="true"><div class="marq-t">
+  <span>ROBLOX STUDIO BUILDER</span><i>◆</i><span>COMMISSIONS OPEN</span><i>◆</i><span>PARTS &amp; UNIONS ONLY</span><i>◆</i><span>+5 YEARS EXPERIENCE</span><i>◆</i>
+  <span>ROBLOX STUDIO BUILDER</span><i>◆</i><span>COMMISSIONS OPEN</span><i>◆</i><span>PARTS &amp; UNIONS ONLY</span><i>◆</i><span>+5 YEARS EXPERIENCE</span><i>◆</i>
 </div></div>
 
 <section class="sec" id="about">
   <div class="wrap">
-    <div class="sec-head rv"><span class="no">01</span><h2 class="clip"><span>About</span></h2></div>
-    <p class="lead rv">Hello! I am a builder on Roblox Studio <em>(without any third-party programs)</em></p>
-    <div class="two">
-      <div class="rv" data-stagger>
-        <div class="col-h">My strong suits</div>
-        <ul class="rows">
-          <li class="rvi"><span class="mk"><svg class="ic" width="15" height="15"><use href="#i-check"/></svg></span>Exterior buildings</li>
-          <li class="rvi"><span class="mk"><svg class="ic" width="15" height="15"><use href="#i-check"/></svg></span>Sci-fi theme</li>
-          <li class="rvi"><span class="mk"><svg class="ic" width="15" height="15"><use href="#i-check"/></svg></span>Blocky terrains</li>
-          <li class="rvi"><span class="mk"><svg class="ic" width="15" height="15"><use href="#i-check"/></svg></span>Mid poly</li>
-          <li class="rvi"><span class="mk"><svg class="ic" width="15" height="15"><use href="#i-check"/></svg></span>Semi-realistic</li>
+    <h2 class="lab">About me</h2>
+    <p class="hello">Hello! I am a builder on Roblox Studio (without any third-party programs)</p>
+    <div class="cols">
+      <div class="panel">
+        <h3>My strong suits</h3>
+        <ul class="suits">
+          <li><svg class="ic" width="24" height="24"><use href="#i-check"/></svg>Exterior buildings</li>
+          <li><svg class="ic" width="24" height="24"><use href="#i-check"/></svg>Sci-fi theme</li>
+          <li><svg class="ic" width="24" height="24"><use href="#i-check"/></svg>Blocky terrains</li>
+          <li><svg class="ic" width="24" height="24"><use href="#i-check"/></svg>Mid poly</li>
+          <li><svg class="ic" width="24" height="24"><use href="#i-check"/></svg>Semi-realistic</li>
         </ul>
         <p class="excel">*I excel in building MM2/FTF style maps</p>
       </div>
-      <div class="rv" data-stagger>
-        <div class="col-h">What I do not take commissions for</div>
-        <ul class="rows no">
-          <li class="rvi"><span class="mk"><svg class="ic" width="12" height="12"><use href="#i-x"/></svg></span>Realistic builds/textures</li>
-          <li class="rvi"><span class="mk"><svg class="ic" width="12" height="12"><use href="#i-x"/></svg></span>Low poly builds</li>
-          <li class="rvi"><span class="mk"><svg class="ic" width="12" height="12"><use href="#i-x"/></svg></span>Any assets made by third-party programs</li>
-          <li class="rvi"><span class="mk"><svg class="ic" width="12" height="12"><use href="#i-x"/></svg></span>Lighting setup</li>
-          <li class="rvi"><span class="mk"><svg class="ic" width="12" height="12"><use href="#i-x"/></svg></span>Terrain Editor</li>
-          <li class="rvi"><span class="mk"><svg class="ic" width="12" height="12"><use href="#i-x"/></svg></span>Improving the visual of a completed build</li>
+      <div class="panel">
+        <h3>What I do not take commissions for</h3>
+        <ul class="nolist">
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Realistic builds/textures</li>
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Low poly builds</li>
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Any assets made by third-party programs</li>
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Lighting setup</li>
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Terrain Editor</li>
+          <li><svg class="ic" width="16" height="16"><use href="#i-x"/></svg>Improving the visual of a completed build</li>
         </ul>
       </div>
     </div>
-    <div class="credits rv" data-stagger>
-      <div class="col-h">I have contributed as a builder to</div>
-      <a class="credit rvi" href="https://www.roblox.com/games/135960504898541/ManHunt" target="_blank" rel="noopener"><span class="idx">01</span><b>ManHunt</b><span class="go">Play on Roblox <svg class="ic" width="14" height="14"><use href="#i-out"/></svg></span></a>
-      <a class="credit rvi" href="https://www.roblox.com/games/131794278839305/Dodge-or-Die" target="_blank" rel="noopener"><span class="idx">02</span><b>Dodge or Die</b><span class="go">Play on Roblox <svg class="ic" width="14" height="14"><use href="#i-out"/></svg></span></a>
-      <a class="credit rvi" href="https://www.roblox.com/games/6172932937/Energy-Assault-FPS" target="_blank" rel="noopener"><span class="idx">03</span><b>Energy Assault FPS</b><span class="go">Play on Roblox <svg class="ic" width="14" height="14"><use href="#i-out"/></svg></span></a>
-      <a class="credit rvi" href="https://www.roblox.com/games/277751860/Epic-Minigames" target="_blank" rel="noopener"><span class="idx">04</span><b>Epic Minigames</b><span class="go">Play on Roblox <svg class="ic" width="14" height="14"><use href="#i-out"/></svg></span></a>
-      <a class="credit rvi" href="https://www.roblox.com/games/1382113806/Silent-Assassin" target="_blank" rel="noopener"><span class="idx">05</span><b>Silent Assassin</b><span class="go">Play on Roblox <svg class="ic" width="14" height="14"><use href="#i-out"/></svg></span></a>
+    <div class="credits">
+      <h3>I have contributed as a builder to:</h3>
+      <div class="cgrid">
+        <a class="credit" href="https://www.roblox.com/games/135960504898541/ManHunt" target="_blank" rel="noopener"><b>ManHunt</b><small>Play on Roblox <svg class="ic" width="13" height="13"><use href="#i-out"/></svg></small></a>
+        <a class="credit" href="https://www.roblox.com/games/131794278839305/Dodge-or-Die" target="_blank" rel="noopener"><b>Dodge or Die</b><small>Play on Roblox <svg class="ic" width="13" height="13"><use href="#i-out"/></svg></small></a>
+        <a class="credit" href="https://www.roblox.com/games/6172932937/Energy-Assault-FPS" target="_blank" rel="noopener"><b>Energy Assault FPS</b><small>Play on Roblox <svg class="ic" width="13" height="13"><use href="#i-out"/></svg></small></a>
+        <a class="credit" href="https://www.roblox.com/games/277751860/Epic-Minigames" target="_blank" rel="noopener"><b>Epic Minigames</b><small>Play on Roblox <svg class="ic" width="13" height="13"><use href="#i-out"/></svg></small></a>
+        <a class="credit" href="https://www.roblox.com/games/1382113806/Silent-Assassin" target="_blank" rel="noopener"><b>Silent Assassin</b><small>Play on Roblox <svg class="ic" width="13" height="13"><use href="#i-out"/></svg></small></a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="band">
-  <div class="wrap band-in">
-    <div class="big"><span data-count="5" data-prefix="+">+5</span></div>
-    <div class="txt rv">years of experience in building<small>Builder on Roblox Studio — without any third-party programs</small></div>
-  </div>
-</section>
-
-<section class="sec" id="work">
+<section class="sec" id="work" style="padding-top:8px">
   <div class="wrap">
-    <div class="sec-head rv"><span class="no">02</span><h2 class="clip"><span>Projects</span></h2></div>
-    <div class="show rv" tabindex="0" aria-label="Project images, set 1">
-      <div class="show-top">
-        <div><h3 class="st-game" aria-live="polite"></h3><p class="st-cap"></p></div>
-        <span class="counter"></span>
-      </div>
+    <h2 class="lab">Projects</h2>
+    <section class="show" tabindex="0" aria-label="Project images, set 1">
+      <div class="show-head"><div><h3 class="st-game" aria-live="polite"></h3><p class="st-cap"></p></div><span class="counter"></span></div>
       <div class="stage">
-        <div class="bar"><i></i></div>
         <button class="arw prev" type="button" aria-label="Previous image"><svg class="ic" width="22" height="22"><use href="#i-left"/></svg></button>
         <button class="arw next" type="button" aria-label="Next image"><svg class="ic" width="22" height="22"><use href="#i-right"/></svg></button>
-          <div class="sl act" data-title="Black Clover #3" data-sub="" aria-hidden="false"><img src="images/work/black-clover-3.jpg" alt="Black Clover #3"></div>
-          <div class="sl" data-title="Black Clover #2" data-sub="" aria-hidden="true"><img src="images/work/black-clover-2.jpg" alt="Black Clover #2" loading="lazy"></div>
-          <div class="sl" data-title="Black Clover #1" data-sub="" aria-hidden="true"><img src="images/work/black-clover-1.jpg" alt="Black Clover #1" loading="lazy"></div>
-          <div class="sl" data-title="Juju" data-sub="" aria-hidden="true"><img src="images/work/juju.jpg" alt="Juju" loading="lazy"></div>
-          <div class="sl" data-title="Sci-fi Lobby #2" data-sub="" aria-hidden="true"><img src="images/work/sci-fi-lobby-2.jpg" alt="Sci-fi Lobby #2" loading="lazy"></div>
-          <div class="sl" data-title="Sci-fi Lobby #1" data-sub="" aria-hidden="true"><img src="images/work/sci-fi-lobby-1.jpg" alt="Sci-fi Lobby #1" loading="lazy"></div>
-          <div class="sl" data-title="Beach House" data-sub="" aria-hidden="true"><img src="images/work/beach-house.jpg" alt="Beach House" loading="lazy"></div>
-          <div class="sl" data-title="Obby Island #1" data-sub="" aria-hidden="true"><img src="images/work/obby-island-1.jpg" alt="Obby Island #1" loading="lazy"></div>
-          <div class="sl" data-title="Obby Island #2" data-sub="" aria-hidden="true"><img src="images/work/obby-island-2.jpg" alt="Obby Island #2" loading="lazy"></div>
-          <div class="sl" data-title="Gladiator Ground" data-sub="" aria-hidden="true"><img src="images/work/gladiator-ground.jpg" alt="Gladiator Ground" loading="lazy"></div>
-          <div class="sl" data-title="Industrial Zone" data-sub="" aria-hidden="true"><img src="images/work/industrial-zone.jpg" alt="Industrial Zone" loading="lazy"></div>
-          <div class="sl" data-title="Storage" data-sub="" aria-hidden="true"><img src="images/work/storage.jpg" alt="Storage" loading="lazy"></div>
-          <div class="sl" data-title="Karaoke #1" data-sub="" aria-hidden="true"><img src="images/work/karaoke-1.jpg" alt="Karaoke #1" loading="lazy"></div>
-          <div class="sl" data-title="Karaoke #2" data-sub="" aria-hidden="true"><img src="images/work/karaoke-2.jpg" alt="Karaoke #2" loading="lazy"></div>
-          <div class="sl" data-title="Karaoke #3" data-sub="" aria-hidden="true"><img src="images/work/karaoke-3.jpg" alt="Karaoke #3" loading="lazy"></div>
-          <div class="sl" data-title="Random builds" data-sub="" aria-hidden="true"><img src="images/work/random-builds.jpg" alt="Random builds" loading="lazy"></div>
-          <div class="sl" data-title="Foosha Village" data-sub="" aria-hidden="true"><img src="images/work/foosha-village.jpg" alt="Foosha Village" loading="lazy"></div>
-          <div class="sl" data-title="Sci-fi Western" data-sub="" aria-hidden="true"><img src="images/work/sci-fi-western.jpg" alt="Sci-fi Western" loading="lazy"></div>
-          <div class="sl" data-title="Random Island" data-sub="" aria-hidden="true"><img src="images/work/random-island.jpg" alt="Random Island" loading="lazy"></div>
-          <div class="sl" data-title="Dungeon Cave #1" data-sub="" aria-hidden="true"><img src="images/work/dungeon-cave-1.jpg" alt="Dungeon Cave #1" loading="lazy"></div>
-          <div class="sl" data-title="Dungeon Cave #2" data-sub="" aria-hidden="true"><img src="images/work/dungeon-cave-2.jpg" alt="Dungeon Cave #2" loading="lazy"></div>
-          <div class="sl" data-title="Metro Ruins" data-sub="" aria-hidden="true"><img src="images/work/metro-ruins.jpg" alt="Metro Ruins" loading="lazy"></div>
-          <div class="sl" data-title="Space Checkpoint #1" data-sub="" aria-hidden="true"><img src="images/work/space-checkpoint-1.jpg" alt="Space Checkpoint #1" loading="lazy"></div>
-          <div class="sl" data-title="Space Checkpoint #2" data-sub="" aria-hidden="true"><img src="images/work/space-checkpoint-2.jpg" alt="Space Checkpoint #2" loading="lazy"></div>
-        <div class="cap-over"></div>
+        <div class="sl act" data-title="Black Clover #3" data-sub="" aria-hidden="false"><img src="images/work/black-clover-3.jpg" alt="Black Clover #3"></div>
+        <div class="sl" data-title="Black Clover #2" data-sub="" aria-hidden="true"><img src="images/work/black-clover-2.jpg" alt="Black Clover #2" loading="lazy"></div>
+        <div class="sl" data-title="Black Clover #1" data-sub="" aria-hidden="true"><img src="images/work/black-clover-1.jpg" alt="Black Clover #1" loading="lazy"></div>
+        <div class="sl" data-title="Juju" data-sub="" aria-hidden="true"><img src="images/work/juju.jpg" alt="Juju" loading="lazy"></div>
+        <div class="sl" data-title="Sci-fi Lobby #2" data-sub="" aria-hidden="true"><img src="images/work/sci-fi-lobby-2.jpg" alt="Sci-fi Lobby #2" loading="lazy"></div>
+        <div class="sl" data-title="Sci-fi Lobby #1" data-sub="" aria-hidden="true"><img src="images/work/sci-fi-lobby-1.jpg" alt="Sci-fi Lobby #1" loading="lazy"></div>
+        <div class="sl" data-title="Beach House" data-sub="" aria-hidden="true"><img src="images/work/beach-house.jpg" alt="Beach House" loading="lazy"></div>
+        <div class="sl" data-title="Obby Island #1" data-sub="" aria-hidden="true"><img src="images/work/obby-island-1.jpg" alt="Obby Island #1" loading="lazy"></div>
+        <div class="sl" data-title="Obby Island #2" data-sub="" aria-hidden="true"><img src="images/work/obby-island-2.jpg" alt="Obby Island #2" loading="lazy"></div>
+        <div class="sl" data-title="Gladiator Ground" data-sub="" aria-hidden="true"><img src="images/work/gladiator-ground.jpg" alt="Gladiator Ground" loading="lazy"></div>
+        <div class="sl" data-title="Industrial Zone" data-sub="" aria-hidden="true"><img src="images/work/industrial-zone.jpg" alt="Industrial Zone" loading="lazy"></div>
+        <div class="sl" data-title="Storage" data-sub="" aria-hidden="true"><img src="images/work/storage.jpg" alt="Storage" loading="lazy"></div>
+        <div class="sl" data-title="Karaoke #1" data-sub="" aria-hidden="true"><img src="images/work/karaoke-1.jpg" alt="Karaoke #1" loading="lazy"></div>
+        <div class="sl" data-title="Karaoke #2" data-sub="" aria-hidden="true"><img src="images/work/karaoke-2.jpg" alt="Karaoke #2" loading="lazy"></div>
+        <div class="sl" data-title="Karaoke #3" data-sub="" aria-hidden="true"><img src="images/work/karaoke-3.jpg" alt="Karaoke #3" loading="lazy"></div>
+        <div class="sl" data-title="Random builds" data-sub="" aria-hidden="true"><img src="images/work/random-builds.jpg" alt="Random builds" loading="lazy"></div>
+        <div class="sl" data-title="Foosha Village" data-sub="" aria-hidden="true"><img src="images/work/foosha-village.jpg" alt="Foosha Village" loading="lazy"></div>
+        <div class="sl" data-title="Sci-fi Western" data-sub="" aria-hidden="true"><img src="images/work/sci-fi-western.jpg" alt="Sci-fi Western" loading="lazy"></div>
+        <div class="sl" data-title="Random Island" data-sub="" aria-hidden="true"><img src="images/work/random-island.jpg" alt="Random Island" loading="lazy"></div>
+        <div class="sl" data-title="Dungeon Cave #1" data-sub="" aria-hidden="true"><img src="images/work/dungeon-cave-1.jpg" alt="Dungeon Cave #1" loading="lazy"></div>
+        <div class="sl" data-title="Dungeon Cave #2" data-sub="" aria-hidden="true"><img src="images/work/dungeon-cave-2.jpg" alt="Dungeon Cave #2" loading="lazy"></div>
+        <div class="sl" data-title="Metro Ruins" data-sub="" aria-hidden="true"><img src="images/work/metro-ruins.jpg" alt="Metro Ruins" loading="lazy"></div>
+        <div class="sl" data-title="Space Checkpoint #1" data-sub="" aria-hidden="true"><img src="images/work/space-checkpoint-1.jpg" alt="Space Checkpoint #1" loading="lazy"></div>
+        <div class="sl" data-title="Space Checkpoint #2" data-sub="" aria-hidden="true"><img src="images/work/space-checkpoint-2.jpg" alt="Space Checkpoint #2" loading="lazy"></div>
       </div>
       <div class="strip">
-        <button class="th" type="button" aria-label="Show Black Clover #3"><img src="images/work/black-clover-3.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Black Clover #2"><img src="images/work/black-clover-2.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Black Clover #1"><img src="images/work/black-clover-1.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Juju"><img src="images/work/juju.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Sci-fi Lobby #2"><img src="images/work/sci-fi-lobby-2.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Sci-fi Lobby #1"><img src="images/work/sci-fi-lobby-1.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Beach House"><img src="images/work/beach-house.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Obby Island #1"><img src="images/work/obby-island-1.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Obby Island #2"><img src="images/work/obby-island-2.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Gladiator Ground"><img src="images/work/gladiator-ground.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Industrial Zone"><img src="images/work/industrial-zone.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Storage"><img src="images/work/storage.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Karaoke #1"><img src="images/work/karaoke-1.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Karaoke #2"><img src="images/work/karaoke-2.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Karaoke #3"><img src="images/work/karaoke-3.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Random builds"><img src="images/work/random-builds.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Foosha Village"><img src="images/work/foosha-village.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Sci-fi Western"><img src="images/work/sci-fi-western.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Random Island"><img src="images/work/random-island.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Dungeon Cave #1"><img src="images/work/dungeon-cave-1.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Dungeon Cave #2"><img src="images/work/dungeon-cave-2.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Metro Ruins"><img src="images/work/metro-ruins.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Space Checkpoint #1"><img src="images/work/space-checkpoint-1.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show Space Checkpoint #2"><img src="images/work/space-checkpoint-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Black Clover #3"><img src="images/work/black-clover-3.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Black Clover #2"><img src="images/work/black-clover-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Black Clover #1"><img src="images/work/black-clover-1.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Juju"><img src="images/work/juju.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Sci-fi Lobby #2"><img src="images/work/sci-fi-lobby-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Sci-fi Lobby #1"><img src="images/work/sci-fi-lobby-1.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Beach House"><img src="images/work/beach-house.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Obby Island #1"><img src="images/work/obby-island-1.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Obby Island #2"><img src="images/work/obby-island-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Gladiator Ground"><img src="images/work/gladiator-ground.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Industrial Zone"><img src="images/work/industrial-zone.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Storage"><img src="images/work/storage.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Karaoke #1"><img src="images/work/karaoke-1.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Karaoke #2"><img src="images/work/karaoke-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Karaoke #3"><img src="images/work/karaoke-3.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Random builds"><img src="images/work/random-builds.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Foosha Village"><img src="images/work/foosha-village.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Sci-fi Western"><img src="images/work/sci-fi-western.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Random Island"><img src="images/work/random-island.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Dungeon Cave #1"><img src="images/work/dungeon-cave-1.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Dungeon Cave #2"><img src="images/work/dungeon-cave-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Metro Ruins"><img src="images/work/metro-ruins.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Space Checkpoint #1"><img src="images/work/space-checkpoint-1.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Space Checkpoint #2"><img src="images/work/space-checkpoint-2.jpg" alt="" loading="lazy"></button>
       </div>
-    </div>
-    <div class="show rv" tabindex="0" aria-label="Project images, set 2">
-      <div class="show-top">
-        <div><h3 class="st-game" aria-live="polite"></h3><p class="st-cap"></p></div>
-        <span class="counter"></span>
-      </div>
+    </section>
+    <section class="show" tabindex="0" aria-label="Project images, set 2">
+      <div class="show-head"><div><h3 class="st-game" aria-live="polite"></h3><p class="st-cap"></p></div><span class="counter"></span></div>
       <div class="stage">
-        <div class="bar"><i></i></div>
         <button class="arw prev" type="button" aria-label="Previous image"><svg class="ic" width="22" height="22"><use href="#i-left"/></svg></button>
         <button class="arw next" type="button" aria-label="Next image"><svg class="ic" width="22" height="22"><use href="#i-right"/></svg></button>
-          <div class="sl act" data-title="Dodge or Die" data-sub="Lobby" aria-hidden="false"><img src="images/work/dodge-or-die-lobby.jpg" alt="Dodge Or Die Lobby"></div>
-          <div class="sl" data-title="Dodge or Die" data-sub="Lobby #2" aria-hidden="true"><img src="images/work/dod-lobby-2.jpg" alt="DOD Lobby #2" loading="lazy"></div>
-          <div class="sl" data-title="Energy Assault FPS" data-sub="Scorchline3" aria-hidden="true"><img src="images/work/ea-scorchline3.jpg" alt="EA - Scorchline3" loading="lazy"></div>
-          <div class="sl" data-title="Energy Assault FPS" data-sub="Scorchline2" aria-hidden="true"><img src="images/work/ea-scorchline2.jpg" alt="EA - Scorchline2" loading="lazy"></div>
-          <div class="sl" data-title="Energy Assault FPS" data-sub="Scorchline1" aria-hidden="true"><img src="images/work/ea-scorchline1.jpg" alt="EA - Scorchline1" loading="lazy"></div>
-          <div class="sl" data-title="ManHunt" data-sub="Yatch" aria-hidden="true"><img src="images/work/manhunt-yatch.jpg" alt="ManHunt - Yatch" loading="lazy"></div>
-          <div class="sl" data-title="ManHunt" data-sub="Tomb" aria-hidden="true"><img src="images/work/manhunt-tomb.jpg" alt="ManHunt - Tomb" loading="lazy"></div>
-          <div class="sl" data-title="Energy Assault FPS" data-sub="Amethyst1" aria-hidden="true"><img src="images/work/ea-amethyst1.jpg" alt="EA - Amethyst1" loading="lazy"></div>
-          <div class="sl" data-title="Energy Assault FPS" data-sub="Amethyst2" aria-hidden="true"><img src="images/work/ea-amethyst2.jpg" alt="EA - Amethyst2" loading="lazy"></div>
-          <div class="sl" data-title="Silent Assassin" data-sub="AutumnFair" aria-hidden="true"><img src="images/work/sa-autumnfair.jpg" alt="SA - AutumnFair" loading="lazy"></div>
-          <div class="sl" data-title="Energy Assault FPS" data-sub="WaterfallBase" aria-hidden="true"><img src="images/work/ea-waterfallbase.jpg" alt="EA - WaterfallBase" loading="lazy"></div>
-          <div class="sl" data-title="Dodge or Die" data-sub="Frost" aria-hidden="true"><img src="images/work/dodgeordie-frost.jpg" alt="DodgeOrDie - Frost" loading="lazy"></div>
-          <div class="sl" data-title="Dodge or Die" data-sub="Colosseum" aria-hidden="true"><img src="images/work/dodgeordie-colosseum.jpg" alt="DodgeOrDie - Colosseum" loading="lazy"></div>
-          <div class="sl" data-title="Dodge or Die" data-sub="Space" aria-hidden="true"><img src="images/work/dodgeordie-space.jpg" alt="DodgeOrDie - Space" loading="lazy"></div>
-        <div class="cap-over"></div>
+        <div class="sl act" data-title="Dodge or Die" data-sub="Lobby" aria-hidden="false"><img src="images/work/dodge-or-die-lobby.jpg" alt="Dodge Or Die Lobby"></div>
+        <div class="sl" data-title="Dodge or Die" data-sub="Lobby #2" aria-hidden="true"><img src="images/work/dod-lobby-2.jpg" alt="DOD Lobby #2" loading="lazy"></div>
+        <div class="sl" data-title="Energy Assault FPS" data-sub="Scorchline3" aria-hidden="true"><img src="images/work/ea-scorchline3.jpg" alt="EA - Scorchline3" loading="lazy"></div>
+        <div class="sl" data-title="Energy Assault FPS" data-sub="Scorchline2" aria-hidden="true"><img src="images/work/ea-scorchline2.jpg" alt="EA - Scorchline2" loading="lazy"></div>
+        <div class="sl" data-title="Energy Assault FPS" data-sub="Scorchline1" aria-hidden="true"><img src="images/work/ea-scorchline1.jpg" alt="EA - Scorchline1" loading="lazy"></div>
+        <div class="sl" data-title="ManHunt" data-sub="Yatch" aria-hidden="true"><img src="images/work/manhunt-yatch.jpg" alt="ManHunt - Yatch" loading="lazy"></div>
+        <div class="sl" data-title="ManHunt" data-sub="Tomb" aria-hidden="true"><img src="images/work/manhunt-tomb.jpg" alt="ManHunt - Tomb" loading="lazy"></div>
+        <div class="sl" data-title="Energy Assault FPS" data-sub="Amethyst1" aria-hidden="true"><img src="images/work/ea-amethyst1.jpg" alt="EA - Amethyst1" loading="lazy"></div>
+        <div class="sl" data-title="Energy Assault FPS" data-sub="Amethyst2" aria-hidden="true"><img src="images/work/ea-amethyst2.jpg" alt="EA - Amethyst2" loading="lazy"></div>
+        <div class="sl" data-title="Silent Assassin" data-sub="AutumnFair" aria-hidden="true"><img src="images/work/sa-autumnfair.jpg" alt="SA - AutumnFair" loading="lazy"></div>
+        <div class="sl" data-title="Energy Assault FPS" data-sub="WaterfallBase" aria-hidden="true"><img src="images/work/ea-waterfallbase.jpg" alt="EA - WaterfallBase" loading="lazy"></div>
+        <div class="sl" data-title="Dodge or Die" data-sub="Frost" aria-hidden="true"><img src="images/work/dodgeordie-frost.jpg" alt="DodgeOrDie - Frost" loading="lazy"></div>
+        <div class="sl" data-title="Dodge or Die" data-sub="Colosseum" aria-hidden="true"><img src="images/work/dodgeordie-colosseum.jpg" alt="DodgeOrDie - Colosseum" loading="lazy"></div>
+        <div class="sl" data-title="Dodge or Die" data-sub="Space" aria-hidden="true"><img src="images/work/dodgeordie-space.jpg" alt="DodgeOrDie - Space" loading="lazy"></div>
       </div>
       <div class="strip">
-        <button class="th" type="button" aria-label="Show Dodge Or Die Lobby"><img src="images/work/dodge-or-die-lobby.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show DOD Lobby #2"><img src="images/work/dod-lobby-2.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show EA - Scorchline3"><img src="images/work/ea-scorchline3.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show EA - Scorchline2"><img src="images/work/ea-scorchline2.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show EA - Scorchline1"><img src="images/work/ea-scorchline1.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show ManHunt - Yatch"><img src="images/work/manhunt-yatch.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show ManHunt - Tomb"><img src="images/work/manhunt-tomb.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show EA - Amethyst1"><img src="images/work/ea-amethyst1.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show EA - Amethyst2"><img src="images/work/ea-amethyst2.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show SA - AutumnFair"><img src="images/work/sa-autumnfair.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show EA - WaterfallBase"><img src="images/work/ea-waterfallbase.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show DodgeOrDie - Frost"><img src="images/work/dodgeordie-frost.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show DodgeOrDie - Colosseum"><img src="images/work/dodgeordie-colosseum.jpg" alt="" loading="lazy"></button>
-        <button class="th" type="button" aria-label="Show DodgeOrDie - Space"><img src="images/work/dodgeordie-space.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show Dodge Or Die Lobby"><img src="images/work/dodge-or-die-lobby.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show DOD Lobby #2"><img src="images/work/dod-lobby-2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show EA - Scorchline3"><img src="images/work/ea-scorchline3.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show EA - Scorchline2"><img src="images/work/ea-scorchline2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show EA - Scorchline1"><img src="images/work/ea-scorchline1.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show ManHunt - Yatch"><img src="images/work/manhunt-yatch.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show ManHunt - Tomb"><img src="images/work/manhunt-tomb.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show EA - Amethyst1"><img src="images/work/ea-amethyst1.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show EA - Amethyst2"><img src="images/work/ea-amethyst2.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show SA - AutumnFair"><img src="images/work/sa-autumnfair.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show EA - WaterfallBase"><img src="images/work/ea-waterfallbase.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show DodgeOrDie - Frost"><img src="images/work/dodgeordie-frost.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show DodgeOrDie - Colosseum"><img src="images/work/dodgeordie-colosseum.jpg" alt="" loading="lazy"></button>
+      <button class="th" type="button" aria-label="Show DodgeOrDie - Space"><img src="images/work/dodgeordie-space.jpg" alt="" loading="lazy"></button>
       </div>
-    </div>
+    </section>
+  </div>
+</section>
+
+<section class="sec" id="reviews" style="padding-top:8px">
+  <div class="wrap">
+    <div class="rv-top"><h2 class="lab">What people say</h2><span class="tag">Sample — replace with real reviews</span></div>
+  </div>
+  <div style="margin-top:26px">
+    <div class="revrow"><div class="revtrack">
+      <figure class="rev"><div class="stars">★★★★★</div><p>“Clean part counts and the lighting pass tied the whole scene together. Smooth from brief to delivery.”</p><figcaption class="who"><span class="av">Z1</span>Commissioner</figcaption></figure>
+      <figure class="rev"><div class="stars">★★★★★</div><p>“Blocked it out fast and nailed the sci-fi mood I was after. Communication was on point.”</p><figcaption class="who"><span class="av">ZK</span>Group owner</figcaption></figure>
+      <figure class="rev"><div class="stars">★★★★★</div><p>“The lobby read exactly how I pictured it, in-game and in screenshots. Will commission again.”</p><figcaption class="who"><span class="av">MR</span>Game developer</figcaption></figure>
+      <figure class="rev" aria-hidden="true"><div class="stars">★★★★★</div><p>“Clean part counts and the lighting pass tied the whole scene together. Smooth from brief to delivery.”</p><figcaption class="who"><span class="av">Z1</span>Commissioner</figcaption></figure>
+      <figure class="rev" aria-hidden="true"><div class="stars">★★★★★</div><p>“Blocked it out fast and nailed the sci-fi mood I was after. Communication was on point.”</p><figcaption class="who"><span class="av">ZK</span>Group owner</figcaption></figure>
+      <figure class="rev" aria-hidden="true"><div class="stars">★★★★★</div><p>“The lobby read exactly how I pictured it, in-game and in screenshots. Will commission again.”</p><figcaption class="who"><span class="av">MR</span>Game developer</figcaption></figure>
+    </div></div>
+    <div class="revrow rev2"><div class="revtrack">
+      <figure class="rev"><div class="stars">★★★★★</div><p>“Super organized workflow and fair revisions. Transferred everything cleanly after payment.”</p><figcaption class="who"><span class="av">AP</span>Studio lead</figcaption></figure>
+      <figure class="rev"><div class="stars">★★★★★</div><p>“Atmospheric builds with real attention to detail. Hit the deadline without any issues.”</p><figcaption class="who"><span class="av">JV</span>Commissioner</figcaption></figure>
+      <figure class="rev"><div class="stars">★★★★★</div><p>“Exactly the MM2/FTF style I needed. Easy to work with from start to finish.”</p><figcaption class="who"><span class="av">DN</span>Buyer</figcaption></figure>
+      <figure class="rev" aria-hidden="true"><div class="stars">★★★★★</div><p>“Super organized workflow and fair revisions. Transferred everything cleanly after payment.”</p><figcaption class="who"><span class="av">AP</span>Studio lead</figcaption></figure>
+      <figure class="rev" aria-hidden="true"><div class="stars">★★★★★</div><p>“Atmospheric builds with real attention to detail. Hit the deadline without any issues.”</p><figcaption class="who"><span class="av">JV</span>Commissioner</figcaption></figure>
+      <figure class="rev" aria-hidden="true"><div class="stars">★★★★★</div><p>“Exactly the MM2/FTF style I needed. Easy to work with from start to finish.”</p><figcaption class="who"><span class="av">DN</span>Buyer</figcaption></figure>
+    </div></div>
   </div>
 </section>
 
 <section class="sec" id="terms">
   <div class="wrap">
-    <div class="sec-head rv"><span class="no">03</span><h2 class="clip"><span>Terms of Service</span></h2></div>
-    <div class="figs rv">
-      <div class="fig"><b>50%</b><span>upfront payment is required before starting</span></div>
-      <div class="fig"><b>50%</b><span>remaining before the final builds are transferred</span></div>
-      <div class="fig"><b>30%</b><span>Roblox fee covered by you when paying via Robux</span></div>
-      <div class="fig"><b>3</b><span>minor revisions included</span></div>
-      <div class="fig"><b>20–50%</b><span>extra for major changes after blockout</span></div>
-      <div class="fig"><b>48h</b><span>to respond to WIP updates or inquiries</span></div>
-      <div class="fig"><b>20%</b><span>discount if I miss the deadline due to my fault</span></div>
-      <div class="fig"><b>100%</b><span>inside Roblox Studio using Parts and Unions</span></div>
+    <h2 class="lab">Terms of Service</h2>
+    <div class="nums">
+      <div class="num"><b>50%</b><span>upfront payment is required before starting</span></div>
+      <div class="num"><b>50%</b><span>remaining must be paid before the final builds are transferred</span></div>
+      <div class="num"><b>30%</b><span>Roblox fee covered by you when paying via Robux</span></div>
+      <div class="num"><b>3</b><span>minor revisions included</span></div>
+      <div class="num"><b>20-50%</b><span>extra charge for major changes after the blockout phase</span></div>
+      <div class="num"><b>48h</b><span>to respond to WIP updates or inquiries</span></div>
+      <div class="num"><b>20%</b><span>discount if I miss the agreed deadline due to my fault</span></div>
+      <div class="num"><b>100%</b><span>inside Roblox Studio using Parts and Unions</span></div>
     </div>
-    <div class="clauses">
-      <div class="clause rv"><h3><i>A</i>Ordering Requirements</h3><ul>
+    <div class="terms">
+      <div class="note"><h3><i>A</i>Ordering Requirements</h3><ul>
         <li><strong>Detailed Brief Required:</strong> Please start the conversation with a clear description of what you need, including reference images, layout sketches, or style examples. Vague greetings without details will be ignored</li>
         <li><strong>Scope Limits:</strong> I only accept small to medium-scale commissions. I do not accept open-world maps or massive cities</li>
       </ul></div>
-      <div class="clause rv"><h3><i>B</i>Payment &amp; Fees</h3><ul>
+      <div class="note"><h3><i>B</i>Payment &amp; Fees</h3><ul>
         <li><strong>Upfront Payment:</strong> A <span class="n">50%</span> upfront payment is required before starting</li>
         <li><strong>Final Payment:</strong> The remaining <span class="n">50%</span> must be paid before the final builds are transferred</li>
         <li><strong>Roblox Marketplace Tax:</strong> If paying via Robux (Gamepass/T-Shirt), you must cover the <span class="n">30%</span> Roblox fee</li>
         <li><strong>No Refunds:</strong> No refunds will be issued once the commission is completed/delivered</li>
       </ul></div>
-      <div class="clause rv"><h3><i>C</i>Progress &amp; Security</h3><ul>
+      <div class="note"><h3><i>C</i>Progress &amp; Security</h3><ul>
         <li><strong>Anti-Snatch:</strong> To prevent asset theft, I will not share or grant access to the Place file until payment is complete.</li>
         <li><strong>Middleman:</strong> Using an official middleman is highly recommended for smooth transactions.</li>
         <li><strong>Deadlines:</strong> If I fail to complete the project by the agreed deadline due to my fault, a <span class="n">20%</span> discount will be applied to the final price.</li>
       </ul></div>
-      <div class="clause rv"><h3><i>D</i>Revisions</h3><ul>
+      <div class="note"><h3><i>D</i>Revisions</h3><ul>
         <li><strong>Included Revisions:</strong> Up to <span class="n">3</span> minor revisions (e.g., adjusting colors, moving small objects, scaling)</li>
         <li><strong>Major Changes:</strong> Any major changes to the original brief/layout after the blockout phase will incur an extra charge from <span class="n">20%</span> to <span class="n">50%</span></li>
       </ul></div>
-      <div class="clause rv"><h3><i>E</i>Inactivity</h3><ul>
+      <div class="note"><h3><i>E</i>Inactivity</h3><ul>
         <li><strong>Client Unresponsiveness:</strong> If you fail to respond to WIP updates or inquiries within <span class="n">48 hours</span> without prior notice, the commission will be closed. The upfront payment will not be refunded</li>
         <li><strong>Restarting Paused Projects:</strong> If a project is closed due to inactivity, a reactivation fee of up to <span class="n">20%</span> may apply to put it back in the queue (depending on the length of inactivity)</li>
       </ul></div>
-      <div class="clause rv"><h3><i>F</i>Copyright &amp; Usage Rights</h3><ul>
+      <div class="note"><h3><i>F</i>Copyright &amp; Usage Rights</h3><ul>
         <li><strong>Studio-Only Builds:</strong> All builds are created <span class="n">100%</span> inside Roblox Studio using Parts and Unions (no external 3D software). Please account for part-count optimization.</li>
         <li><strong>Showcase Rights:</strong> I reserve the right to post screenshots, videos, or showcase the completed build in my personal portfolio (Remind me if you do not want your builds in the showcase)</li>
       </ul></div>
@@ -507,137 +472,103 @@ footer{border-top:1px solid var(--line2);padding:30px 0}
   </div>
 </section>
 
-<section class="contact" id="contact">
+<section class="sec" id="contact" style="padding-top:8px">
   <div class="wrap">
-    <div class="eyebrow rv">Get in touch</div>
-    <h2 class="clip"><span>Contact me for</span></h2><h2 class="clip" style="margin-top:0"><span>commissions</span></h2>
-    <div class="rv">
-      <div class="crow">
-        <span class="l"><svg class="ic" width="18" height="18"><use href="#i-mail"/></svg>Gmail</span>
-        <a class="v" href="mailto:nhatduy190208@gmail.com">nhatduy190208@gmail.com</a>
-        <button class="cbtn" type="button" data-copy="nhatduy190208@gmail.com" aria-label="Copy email address"><svg class="ic" width="15" height="15"><use href="#i-copy"/></svg><span>Copy</span></button>
-      </div>
-      <div class="crow">
-        <span class="l"><svg class="ic" width="18" height="18"><use href="#i-chat"/></svg>Discord</span>
-        <a class="v" href="https://discord.com/users/768445951089311764" target="_blank" rel="noopener">brain1349</a>
-        <button class="cbtn" type="button" data-copy="brain1349" aria-label="Copy Discord username"><svg class="ic" width="15" height="15"><use href="#i-copy"/></svg><span>Copy</span></button>
-      </div>
-      <div class="crow">
-        <span class="l"><svg class="ic" width="18" height="18"><use href="#i-user"/></svg>Roblox</span>
-        <a class="v" href="https://www.roblox.com/users/1455286846/profile" target="_blank" rel="noopener">Zouie</a>
-        <a class="cbtn" href="https://www.roblox.com/users/1455286846/profile" target="_blank" rel="noopener">Open profile <svg class="ic" width="15" height="15"><use href="#i-out"/></svg></a>
+    <div class="contact">
+      <h2>Contact me for commissions</h2>
+      <div class="ct">
+        <div class="card">
+          <a class="main" href="mailto:nhatduy190208@gmail.com"><span class="l"><svg class="ic" width="16" height="16"><use href="#i-mail"/></svg>Gmail</span><span class="v">nhatduy190208@gmail.com</span></a>
+          <button class="copy" type="button" data-copy="nhatduy190208@gmail.com" aria-label="Copy email address"><svg class="ic" width="14" height="14"><use href="#i-copy"/></svg><span>Copy</span></button>
+        </div>
+        <div class="card">
+          <a class="main" href="https://discord.com/users/768445951089311764" target="_blank" rel="noopener"><span class="l"><svg class="ic" width="16" height="16"><use href="#i-chat"/></svg>Discord</span><span class="v">brain1349</span></a>
+          <button class="copy" type="button" data-copy="brain1349" aria-label="Copy Discord username"><svg class="ic" width="14" height="14"><use href="#i-copy"/></svg><span>Copy</span></button>
+        </div>
+        <div class="card">
+          <a class="main" href="https://www.roblox.com/users/1455286846/profile" target="_blank" rel="noopener"><span class="l"><svg class="ic" width="16" height="16"><use href="#i-user"/></svg>Roblox</span><span class="v">Zouie</span></a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 </main>
 
-<footer><div class="foot"><span><b>Zouie</b> — Roblox Studio Builder</span><a href="#top">Back to top ↑</a></div></footer>
+<footer>ZOUIE</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script>
 (function(){
-  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var lenis=null;
-  if(window.Lenis && !reduce){
-    lenis=new Lenis({duration:1.1,easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t))},smoothWheel:true});
-    function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf);
-  }
-  function scrollTo(el){ if(lenis){lenis.scrollTo(el,{offset:-10})} else {el.scrollIntoView({behavior:reduce?'auto':'smooth'})} }
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){
-    a.addEventListener('click',function(e){
-      var id=a.getAttribute('href'); if(id==='#'||id==='#top'){e.preventDefault();lenis?lenis.scrollTo(0):scrollTo(document.body);return}
-      var t=document.querySelector(id); if(t){e.preventDefault();scrollTo(t)}
-    });
-  });
-
-  // header + scroll progress
-  var hdr=document.getElementById('hdr'),sp=document.getElementById('sprog');
-  function onScroll(y){
-    y=y||window.scrollY;
-    hdr.classList.toggle('scrolled',y>20);
-    var h=document.documentElement.scrollHeight-innerHeight;
-    sp.style.width=(h>0?(y/h*100):0)+'%';
-  }
-  if(lenis)lenis.on('scroll',function(e){onScroll(e.scroll)}); window.addEventListener('scroll',function(){onScroll()},{passive:true}); onScroll();
-
-  // reveal + stagger + clip
-  var obs=new IntersectionObserver(function(es){es.forEach(function(e){
-    if(!e.isIntersecting)return;
-    var el=e.target; el.classList.add('in');
-    if(el.hasAttribute('data-stagger')){
-      el.querySelectorAll('.rvi').forEach(function(c,i){c.style.transition='opacity 1s var(--ease) '+(i*70)+'ms, transform 1s var(--ease) '+(i*70)+'ms';c.classList.add('in')});
-    }
-    obs.unobserve(el);
-  })},{rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.rv,.clip,.sec-head').forEach(function(e){obs.observe(e)});
-  // rvi default hidden
-  var st=document.createElement('style');st.textContent='.rvi{opacity:0;transform:translateY(20px)}.rvi.in{opacity:1;transform:none}';document.head.appendChild(st);
-  setTimeout(function(){document.querySelectorAll('.hero .rv,.hero .clip').forEach(function(e){e.classList.add('in')})},80);
-  setTimeout(function(){document.querySelectorAll('.rv:not(.in)').forEach(function(e){var r=e.getBoundingClientRect();if(r.top<innerHeight)e.classList.add('in')})},1800);
-
-  // count up
-  function countUp(el){
-    var target=parseFloat(el.getAttribute('data-count')),pre=el.getAttribute('data-prefix')||'',suf=el.getAttribute('data-suffix')||'',dur=1200,t0=null;
-    function step(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/dur);var e=1-Math.pow(1-p,3);el.textContent=pre+Math.round(target*e)+suf;if(p<1)requestAnimationFrame(step)}
-    requestAnimationFrame(step);
-  }
-  var cObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);cObs.unobserve(e.target)}})},{threshold:.6});
-  document.querySelectorAll('[data-count]').forEach(function(e){if(reduce){e.textContent=(e.getAttribute('data-prefix')||'')+e.getAttribute('data-count')}else cObs.observe(e)});
-
-  // magnetic buttons
-  if(!reduce && matchMedia('(hover:hover)').matches){
-    document.querySelectorAll('[data-magnetic]').forEach(function(b){
-      b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();var x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;b.style.transform='translate('+x*.25+'px,'+y*.35+'px)'});
-      b.addEventListener('mouseleave',function(){b.style.transform=''});
-    });
-  }
-
   // slideshows
   document.querySelectorAll('.show').forEach(function(show){
     var slides=[].slice.call(show.querySelectorAll('.sl')),
         thumbs=[].slice.call(show.querySelectorAll('.th')),
         strip=show.querySelector('.strip'),
         game=show.querySelector('.st-game'),cap=show.querySelector('.st-cap'),count=show.querySelector('.counter'),
-        over=show.querySelector('.cap-over'),bar=show.querySelector('.bar i'),
         stage=show.querySelector('.stage'),i=0,total=slides.length;
     function pad(n){return String(n).padStart(2,'0')}
     function go(n){
       i=(n+total)%total;
       slides.forEach(function(s,k){var on=k===i;s.classList.toggle('act',on);s.setAttribute('aria-hidden',on?'false':'true')});
       thumbs.forEach(function(t,k){var on=k===i;t.classList.toggle('on',on);t.setAttribute('aria-current',on?'true':'false')});
-      var s=slides[i],g=s.dataset.title,sub=s.dataset.sub||'';
-      game.textContent=g;cap.textContent=sub;
-      count.innerHTML='<b>'+pad(i+1)+'</b> / '+pad(total);
-      if(over)over.innerHTML='<b>'+g+'</b>'+(sub?' <s>— '+sub+'</s>':'');
-      if(bar)bar.style.width=((i+1)/total*100)+'%';
-      var t=thumbs[i];strip.scrollTo({left:t.offsetLeft-strip.clientWidth/2+t.clientWidth/2,behavior:reduce?'auto':'smooth'});
+      var s=slides[i];
+      game.textContent=s.dataset.title;cap.textContent=s.dataset.sub||'';
+      count.textContent=pad(i+1)+' / '+pad(total);
+      var t=thumbs[i];strip.scrollTo({left:t.offsetLeft-strip.clientWidth/2+t.clientWidth/2,behavior:'smooth'});
       var nx=slides[(i+1)%total].querySelector('img');if(nx&&nx.loading==='lazy')nx.loading='eager';
     }
     show.querySelector('.prev').addEventListener('click',function(){go(i-1)});
     show.querySelector('.next').addEventListener('click',function(){go(i+1)});
     thumbs.forEach(function(t,k){t.addEventListener('click',function(){go(k)})});
-    show.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'){go(i-1);e.preventDefault()}else if(e.key==='ArrowRight'){go(i+1);e.preventDefault()}});
+    show.addEventListener('keydown',function(e){
+      if(e.key==='ArrowLeft'){go(i-1);e.preventDefault()}
+      else if(e.key==='ArrowRight'){go(i+1);e.preventDefault()}
+    });
     var x0=null;
     stage.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
-    stage.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>40)go(dx<0?i+1:i-1)});
+    stage.addEventListener('touchend',function(e){
+      if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;
+      if(Math.abs(dx)>40)go(dx<0?i+1:i-1);
+    });
     go(0);
   });
 
-  // copy
-  document.querySelectorAll('.cbtn[data-copy]').forEach(function(b){
+  // copy buttons
+  document.querySelectorAll('.copy').forEach(function(b){
     b.addEventListener('click',function(){
       var text=b.dataset.copy,label=b.querySelector('span');
-      function done(){b.classList.add('done');if(label)label.textContent='Copied';setTimeout(function(){b.classList.remove('done');if(label)label.textContent='Copy'},1600)}
-      function fb(){var a=document.createElement('textarea');a.value=text;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(a)}
-      if(navigator.clipboard&&isSecureContext){navigator.clipboard.writeText(text).then(done,fb)}else fb();
+      function done(){b.classList.add('done');label.textContent='Copied';setTimeout(function(){b.classList.remove('done');label.textContent='Copy'},1600)}
+      if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done,fallback)}else fallback();
+      function fallback(){var a=document.createElement('textarea');a.value=text;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(a)}
     });
   });
 
-  // nav active
-  var links={};document.querySelectorAll('.nav a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
-  var sObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){Object.values(links).forEach(function(a){a.classList.remove('on')});var a=links[e.target.id];if(a)a.classList.add('on')}})},{rootMargin:'-40% 0px -55% 0px'});
-  ['about','work','terms','contact'].forEach(function(id){var el=document.getElementById(id);if(el)sObs.observe(el)});
+  // nav highlight
+  var links=[].slice.call(document.querySelectorAll('.links a'));
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){links.forEach(function(a){a.classList.remove('on')});var a=map[e.target.id];if(a)a.classList.add('on')}
+    })},{rootMargin:'-35% 0px -55% 0px'});
+    ['about','work','reviews','terms','contact'].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
+
+    // reveal
+    var els=[].slice.call(document.querySelectorAll('.panel,.credit,.show,.note,.num,.stat,.rev,.contact'));
+    els.forEach(function(e){e.classList.add('r')});
+    var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){ro.observe(e)});
+    setTimeout(function(){els.forEach(function(e){e.classList.add('on')})},1500);
+
+    // count-up on big numbers
+    var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function countUp(el){
+      var target=parseFloat(el.getAttribute('data-count')),pre=el.getAttribute('data-prefix')||'',pad=+(el.getAttribute('data-pad')||0),dur=1100,t0=null;
+      function fmt(v){v=String(Math.round(v));while(v.length<pad)v='0'+v;return pre+v}
+      function step(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=fmt(target*e);if(p<1)requestAnimationFrame(step)}
+      requestAnimationFrame(step);
+    }
+    var cObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);cObs.unobserve(e.target)}})},{threshold:.5});
+    document.querySelectorAll('[data-count]').forEach(function(e){if(reduce){return}cObs.observe(e)});
+  }
 })();
 </script>
 </body>

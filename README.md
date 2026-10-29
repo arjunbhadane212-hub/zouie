@@ -10,10 +10,10 @@ python3 -m http.server 4710
 Open http://localhost:4710.
 
 ## Design
-Dark, cinematic, motion-led (Framer-style). Bricolage Grotesque display + Inter body + Instrument Serif
-italic accents, on near-black with a single champagne accent. Smooth scrolling (Lenis), scroll-reveal with
-stagger, hero entrance, count-up, marquee, magnetic buttons, grain + scroll-progress. Honours
-prefers-reduced-motion.
+Neo-brutalist: cream grid paper, thick black borders, hard offset shadows, yellow accent; Space Grotesk +
+Silkscreen pixel. Big count-up stat tiles (+5 / 05 / 38), a scrolling marquee, scroll-reveal, and a scrolling
+reviews band. The reviews are PLACEHOLDERS (tagged "Sample") — replace with real client quotes before relying
+on them. Honours prefers-reduced-motion.
 
 ## Projects
 Two slideshows (24 + 14 = all 38 original carousel images), each slide titled by its original caption;
